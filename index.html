@@ -5,8 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" types="images/png" href="images/Minky_whale_Profile_pic_square.png">
 </head>
 <body>
-    <h1>Hello World :)</h1>
+   
+    <header class="site-header">
+        
+        <nav class="navbar">
+            <div class="container">
+            <a class="navbar-brand" href="#home">0-Robinson-1</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                <li class="nav-item"><a class="nav-link" href="#videos">Videos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+           </div>
+         </nav>
+    </header>
+
+    <main>
+
+        <div class="gallery">
+            <img src="images/Lone_whale.jpg" alt="Gallery Image" loading="lazy" />
+        </div>
+
+    </main>  
+    <div id="root"></div>
+    <script type="module" src="/@vite/client"></script>
+    <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
