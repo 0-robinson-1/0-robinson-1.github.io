@@ -82,7 +82,7 @@ header {
     text-align: center;
     padding: 1rem 0;
   }
-  
+/*
   /* Constrain the gallery image so it sits below the header */
   .gallery img {
     display: block;
@@ -104,19 +104,19 @@ header {
 
 /* Gallery background */
 .gallery {
-  background-image: url('../images/Lone_whale.jpg');
+  background-image: url('../images/Humpback_Whale.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: top;
   width: 100%;
-  height: 400px; /* adjust as needed */
+  height: calc(100vh - 4rem); /* full viewport height minus header */
 }
 
 /* Videos page override */
 body.videos-page {
   display: block;   /* disable flex centering */
-  height: auto;     /* remove full-height centering */
-  background-color: #000;
-  padding-top: 4rem; /* match header offset */
+  height: fit-content;     /* remove full-height centering */
+  background-color: #00a2d8;
+  padding-top: 0rem; /* match header offset */
 }
 
 /* Full-width responsive video player */
