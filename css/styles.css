@@ -1,3 +1,6 @@
+/* Bootstrap CSS Import */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css");
+
 /*────────────────────────────────────────────────────────
   Global Site Header
 ────────────────────────────────────────────────────────*/
@@ -6,7 +9,7 @@ header.site-header {
   /* make it span the full width and sit on top */
   position: fixed;
   top: 0;
-  left: 0;
+  left: 10;
   width: 100%;
   background: rgba(255, 255, 255, 0.9);  /* semi-opaque white */
   backdrop-filter: blur(6px);             /* nice frosted effect */
