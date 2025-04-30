@@ -60,14 +60,12 @@ body {
 }
 
 
+/* Global body styles */
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #00a2d8;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #00a2d8;
+  padding-top: 4rem; /* offset for fixed header */
 }
 
 h1 {
@@ -99,4 +97,69 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
+}
+
+/* Gallery background */
+.gallery {
+  background-image: url('../images/Lone_whale.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 400px; /* adjust as needed */
+}
+
+/* Videos page override */
+body.videos-page {
+  display: block;   /* disable flex centering */
+  height: auto;     /* remove full-height centering */
+  background-color: #000;
+  padding-top: 4rem; /* match header offset */
+}
+
+/* Full-width responsive video player */
+.video-player {
+  position: relative;
+  width: 100vw;
+  height: 0;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  margin: 4rem 0 0;     /* push below fixed header */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.video-player iframe,
+#player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Video thumbnail carousel */
+.video-playlist {
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0;
+  gap: 0.75rem;
+}
+.video-playlist .thumbnail {
+  flex: 0 0 auto;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.video-playlist .thumbnail:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.video-playlist .thumbnail.active {
+  border-color: #00a2d8;
+}
+.video-playlist .thumbnail img {
+  display: block;
+  width: 140px;
+  height: auto;
+  border-radius: 4px;
 }

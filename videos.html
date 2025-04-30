@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>0.Robinson.1</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" types="images/png" href="images/Minky_whale_Profile_pic_square.png">
 </head>
-<body>
+<body class="videos-page">
    
     <header class="site-header">
         
@@ -23,3 +23,100 @@
            </div>
          </nav>
     </header>
+
+<main id="videos" class="videos-section">
+  <div class="video-player">
+    <!-- YouTube player will be injected here -->
+    <div id="player"></div>
+  </div>
+  <div id="playlist" class="video-playlist"></div>
+</main>
+
+<script>
+  // Your list of video IDs
+  const videoIds = [
+    'LOAaMxWGaVA',
+    'c5zMRwL7RyY',
+    'nkYkEI0o9t4'
+    // add more IDs as needed
+  ];
+  let currentIndex = Math.floor(Math.random() * videoIds.length);
+  let player;
+
+  // Called by YouTube API when it loads
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '500',              // adjust height here
+      width: '100%',
+      videoId: videoIds[currentIndex],
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      },
+      playerVars: {
+        autoplay: 1,              // set to 0 to disable autoplay
+        controls: 1,
+        modestbranding: 1,        // cleaner YouTube logo
+        rel: 0,                   // no related videos at end
+        playsinline: 1            // autoplay on mobile devices
+        // loop: 1,               // uncomment to loop playlist
+        // playlist: videoIds.join(',')  // required for loop
+      }
+    });
+    buildPlaylist();
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+      currentIndex = (currentIndex + 1) % videoIds.length;
+      player.loadVideoById(videoIds[currentIndex]);
+      highlightActiveThumbnail();
+    }
+  }
+
+  function buildPlaylist() {
+    const playlistEl = document.getElementById('playlist');
+    videoIds.forEach((id, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'thumbnail';
+      thumb.innerHTML = `
+        <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="Video ${idx + 1}" data-index="${idx}" />
+      `;
+      thumb.addEventListener('click', () => {
+        currentIndex = idx;
+        player.loadVideoById(id);
+        highlightActiveThumbnail();
+      });
+      playlistEl.appendChild(thumb);
+    });
+    highlightActiveThumbnail();
+  }
+
+  function highlightActiveThumbnail() {
+    document.querySelectorAll('#playlist .thumbnail').forEach(el => {
+      el.classList.toggle('active', +el.firstElementChild.dataset.index === currentIndex);
+    });
+  }
+
+  // When the player is ready, set the highest available quality
+  function onPlayerReady(event) {
+    const available = event.target.getAvailableQualityLevels();
+    if (available && available.length) {
+      // first element is the highest quality
+      event.target.setPlaybackQuality(available[0]);
+    } else {
+      // fallback to 'highres'
+      event.target.setPlaybackQuality('highres');
+    }
+  }
+
+  // Dynamically load YouTube IFrame API after defining the callback
+  (function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScript = document.getElementsByTagName('script')[0];
+    firstScript.parentNode.insertBefore(tag, firstScript);
+  })();
+</script>
+</body>
+</html>
