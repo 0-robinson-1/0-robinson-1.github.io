@@ -104,11 +104,19 @@ header {
 
 /* Gallery background */
 .gallery {
+  /* Use your actual image path here */
   background-image: url('../images/Humpback_Whale.jpg');
-  background-size: cover;
-  background-position: top;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
   width: 100%;
-  height: calc(100vh - 4rem); /* full viewport height minus header */
+  height: calc(100vh - 4rem);
+}
+
+/* Remove extra Bootstrap spacing on the homepage main wrapper */
+main.container.mt-5.pt-5 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* Videos page override */
