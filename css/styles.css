@@ -178,7 +178,7 @@ body.videos-page {
 /* Active nav link styling */
 .navbar-light .navbar-nav .nav-link.active {
   background-color: rgba(0, 123, 255, 0.8);
-  color: #fff;
+  color: #95dfff;
   border-radius: 0.25rem;
 }
 
@@ -188,4 +188,11 @@ html {
   /* or, if you prefer not to show a disabled scrollbar and your users are on modern browsers, you can use:
   scrollbar-gutter: stable;
   */
+}
+
+/* Exercise box styling */
+.exercise {
+  background-color: #9de0ff; /* very light blue */
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
