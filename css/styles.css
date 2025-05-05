@@ -178,7 +178,7 @@ body.videos-page {
 /* Active nav link styling */
 .navbar-light .navbar-nav .nav-link.active {
   background-color: rgba(0, 123, 255, 0.8);
-  color: #95dfff;
+  color: #c3e7f7;
   border-radius: 0.25rem;
 }
 
