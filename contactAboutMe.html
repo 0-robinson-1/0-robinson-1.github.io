@@ -29,6 +29,7 @@
 <form action="https://formsubmit.co/7e41c9a4f49e88ee2cdb7039b4db070a" method="POST" class="mb-5">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_next" value="https://0-robinson-1.github.io/thank-you.html">
+    <input type="hidden" id="replyto" name="_replyto">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <input type="text" class="form-control" id="name" name="name" required>
@@ -43,3 +44,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Send Message</button>
 </form>
+<script>
+    document.getElementById('email').addEventListener('input', function(e) {
+      document.getElementById('replyto').value = e.target.value;
+    });
+  </script>
