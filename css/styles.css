@@ -174,3 +174,18 @@ body.videos-page {
   height: auto;
   border-radius: 4px;
 }
+
+/* Active nav link styling */
+.navbar-light .navbar-nav .nav-link.active {
+  background-color: rgba(0, 123, 255, 0.8);
+  color: #fff;
+  border-radius: 0.25rem;
+}
+
+/* Always reserve space for the vertical scrollbar to prevent layout shifts */
+html {
+  overflow-y: scroll;
+  /* or, if you prefer not to show a disabled scrollbar and your users are on modern browsers, you can use:
+  scrollbar-gutter: stable;
+  */
+}
