@@ -196,3 +196,14 @@ html {
   border-radius: 0.5rem;
   padding: 1rem;
 }
+
+/* Center 404 page content vertically */
+.error-page main {
+  min-height: calc(100vh - 56px); /* subtract navbar height */
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
