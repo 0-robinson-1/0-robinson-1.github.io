@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <script>
-    fetch('/head.html')
+    fetch('head.html')
       .then(r => r.text())
       .then(html => document.head.insertAdjacentHTML('beforeend', html))
       .catch(console.error);
@@ -127,7 +127,7 @@
 </script>
 <div id="site-footer"></div>
 <script>
-  fetch('/footer.html')
+  fetch('footer.html')
     .then(r => r.text())
     .then(html => {
       document.getElementById('site-footer').innerHTML = html;
