@@ -218,3 +218,15 @@ html {
   justify-content: center;
   align-items: center;
 }
+
+  /* Position and style the status message */
+  .status-message {
+    position: fixed;
+    left: 10rem;        /* distance from left edge */
+    bottom: 1rem;      /* distance from bottom edge */
+    color: #fff;       /* white text */
+    font-size: 1.2rem; /* slightly bigger than normal */
+    line-height: 1.4;  /* good spacing between lines */
+    text-shadow: 0 0 3px rgba(0,0,0,0.7); /* optional: improve readability */
+    z-index: 1000;     /* make sure it sits on top */
+  }
