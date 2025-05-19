@@ -4,7 +4,11 @@
   <script>
     fetch('head.html')
       .then(r => r.text())
-      .then(html => document.head.insertAdjacentHTML('beforeend', html))
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        document.head.innerHTML = doc.head.innerHTML;
+      })
       .catch(console.error);
   </script>
 </head>
