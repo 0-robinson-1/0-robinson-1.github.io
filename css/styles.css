@@ -9,7 +9,7 @@ header.site-header {
   /* make it span the full width and sit on top */
   position: fixed;
   top: 0;
-  left: 10;
+  left: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.9);  /* semi-opaque white */
   backdrop-filter: blur(6px);             /* nice frosted effect */
@@ -82,10 +82,6 @@ header {
     text-align: center;
     padding: 1rem 0;
 }
-  */
-/*
-  /* Constrain the gallery image so it sits below the header */
-  
 
   .navbar {
     /* existing styles */
@@ -102,9 +98,16 @@ header {
   background-image: url('../images/Humpback_Whale.jpg');
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   width: 100%;
   height: calc(100vh - 4rem);
+}
+
+/* Gallery responsive fallback image */
+.gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* Remove extra Bootstrap spacing on the homepage main wrapper */
