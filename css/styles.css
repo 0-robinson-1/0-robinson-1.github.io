@@ -59,7 +59,7 @@ header .navbar .container {
 
 /* Push page content below the fixed header */
 body {
-  padding-top: 4rem; /* slightly larger than header’s height */
+  padding-top: 2.7rem; /* match navbar height */
 }
 
 
@@ -68,7 +68,6 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #00a2d8;
-  padding-top: 4rem; /* offset for fixed header */
 }
 
 h1 {
