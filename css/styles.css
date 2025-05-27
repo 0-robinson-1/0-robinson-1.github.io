@@ -81,17 +81,11 @@ header {
     z-index: 2;
     text-align: center;
     padding: 1rem 0;
-  }
+}
+  */
 /*
   /* Constrain the gallery image so it sits below the header */
-  .gallery img {
-    display: block;
-    max-width: 80%;
-    height: auto;
-    margin: 1rem auto;
-    position: relative;
-    z-index: 1;
-  }
+  
 
   .navbar {
     /* existing styles */
@@ -236,3 +230,9 @@ html {
     margin-bottom: 20px;
     color: white;
   }
+
+/* Gallery image responsiveness */
+.gallery img {
+  width: 100%;
+  height: auto;
+}
