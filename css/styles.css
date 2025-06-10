@@ -100,7 +100,6 @@ header {
   background-size: auto 100%;
   overflow: hidden;
   touch-action: none;
-  width: 100%;
   height: calc(100vh - 4rem);
 }
 
