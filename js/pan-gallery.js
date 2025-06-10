@@ -7,7 +7,7 @@
   let isDragging = false;
   let startX, startY;
   // background-position in % [0..100]
-  let posX = 0, posY = 50;
+  let posX = 50, posY = 50;
 
   function updateBackground() {
     gallery.style.backgroundPosition = `${posX}% ${posY}%`;
