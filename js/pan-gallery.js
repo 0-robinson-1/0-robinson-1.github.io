@@ -26,7 +26,8 @@
     // translate pixel movement to percentages
     const rect = gallery.getBoundingClientRect();
     posX = Math.min(100, Math.max(0, posX - (dx / rect.width) * 100));
-    posY = Math.min(100, Math.max(0, posY - (dy / rect.height) * 100));
+    // amplify vertical movement sensitivity
+    posY = Math.min(100, Math.max(0, posY - (dy / rect.height) * 100 * 2));
     updateBackground();
     startX = clientX;
     startY = clientY;
