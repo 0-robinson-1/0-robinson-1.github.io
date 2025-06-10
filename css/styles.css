@@ -95,7 +95,7 @@ header {
 .gallery {
   /* Use your actual image path here */
   background-image: url('../images/Humpback_Whale_copy.jpg');
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
