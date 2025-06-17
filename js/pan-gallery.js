@@ -27,7 +27,7 @@
     const rect = gallery.getBoundingClientRect();
     posX = Math.min(100, Math.max(0, posX - (dx / rect.width) * 100));
     // amplify vertical movement sensitivity
-    posY = Math.min(100, Math.max(0, posY - (dy / rect.height) * 100 * 2));
+    posY = Math.min(100, Math.max(0, posY - (dy / rect.height) * 100 * 5));
     updateBackground();
     startX = clientX;
     startY = clientY;
