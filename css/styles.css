@@ -103,6 +103,14 @@ header {
   height: calc(100vh - 4rem);
 }
 
+/* Make sure .gallery (your hero) fills the screen and hides overflow */
+.gallery{
+  min-height:100vh;
+  background-size:cover;
+  background-position:50% 50%;   /* centred focal point */
+  overflow:hidden;
+}
+
 /* Gallery responsive fallback image */
 .gallery img {
   display: block;

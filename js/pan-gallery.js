@@ -1,61 +1,55 @@
-// pan-gallery.js
+// pan-gallery.js  – tilt-or-scroll parallax, < 1 kB
 
-(function() {
-  const gallery = document.querySelector('.gallery');
-  if (!gallery) return;
+(function () {
+  const el = document.querySelector('.gallery');
+  if (!el) return;
 
-  let isDragging = false;
-  let startX, startY;
-  // background-position in % [0..100]
+  // -------- helpers --------
+  const clamp = (v, min = 0, max = 100) => Math.min(max, Math.max(min, v));
+
+  // Normalised centre (50 %, 50 %)
   let posX = 50, posY = 50;
 
-  function updateBackground() {
-    gallery.style.backgroundPosition = `${posX}% ${posY}%`;
+  function render() {
+    el.style.backgroundPosition = `${posX}% ${posY}%`;
   }
 
-  function onDown(clientX, clientY) {
-    isDragging = true;
-    startX = clientX;
-    startY = clientY;
+  // -------- 1. Device-orientation (phones/tablets) --------
+  function onTilt (e) {
+    // γ = left/right, β = front/back. Numbers are roughly −90…90
+    const { gamma = 0, beta = 0 } = e;
+    // Tune sensitivity ↓ (smaller = slower pan)
+    posX = clamp(50 + gamma * 0.7);
+    posY = clamp(50 + beta  * 0.7);
+    render();
   }
 
-  function onMove(clientX, clientY) {
-    if (!isDragging) return;
-    const dx = clientX - startX;
-    const dy = clientY - startY;
-    // translate pixel movement to percentages
-    const rect = gallery.getBoundingClientRect();
-    posX = Math.min(100, Math.max(0, posX - (dx / rect.width) * 100));
-    // amplify vertical movement sensitivity
-    posY = Math.min(100, Math.max(0, posY - (dy / rect.height) * 100 * 5));
-    updateBackground();
-    startX = clientX;
-    startY = clientY;
+  function tryEnableTilt () {
+    if (!('DeviceOrientationEvent' in window)) return;
+
+    // iOS 13+ needs a user-gesture + permission
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(p => { if (p === 'granted') addEventListener('deviceorientation', onTilt); })
+        .catch(console.warn);
+    } else {
+      addEventListener('deviceorientation', onTilt);
+    }
   }
 
-  function onUp() {
-    isDragging = false;
+  // -------- 2. Mouse-move fallback (laptops/desktops) --------
+  function onMouse (e) {
+    const { innerWidth:w, innerHeight:h } = window;
+    // Map cursor position 0→w to 0→100 (same for y)
+    posX = (e.clientX / w) * 100;
+    posY = (e.clientY / h) * 100;
+    render();
   }
 
-  // Mouse events
-  gallery.addEventListener('mousedown', e => onDown(e.clientX, e.clientY));
-  window.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
-  window.addEventListener('mouseup', onUp);
+  // -------- init --------
+  render();              // paint once
+  tryEnableTilt();       // most phones
 
-  // Touch events
-  gallery.addEventListener('touchstart', e => {
-    const t = e.touches[0];
-    onDown(t.clientX, t.clientY);
-    e.preventDefault();
-  }, { passive: false });
-  gallery.addEventListener('touchmove', e => {
-    const t = e.touches[0];
-    onMove(t.clientX, t.clientY);
-  }, { passive: false });
-  gallery.addEventListener('touchend', e => {
-    onUp();
-  });
-
-  // initialize
-  updateBackground();
+  // fallback for everything else
+  addEventListener('mousemove', onMouse, { passive:true });
 })();
