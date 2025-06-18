@@ -189,10 +189,10 @@ body.videos-page {
 
 /* Always reserve space for the vertical scrollbar to prevent layout shifts */
 html {
-  /* overflow-y: scroll;*/
-  /* or, if you prefer not to show a disabled scrollbar and your users are on modern browsers, you can use:*/
+  overflow-y: scroll;
+  /* or, if you prefer not to show a disabled scrollbar and your users are on modern browsers, you can use:
   scrollbar-gutter: stable;
-  
+  */
 }
 
 /* Exercise box styling */
