@@ -93,6 +93,8 @@ header {
 
 /* Gallery background */
 .gallery {
+  position: relative;
+  z-index: 0;
   /* Use your actual image path here */
   background-image: url('../images/Humpback_Whale_copy.jpg');
   background-position: 50% 50%;
@@ -238,7 +240,7 @@ html {
 
 .visitor-counter {
   position: absolute;
-  top: 2.7rem;      /* align just below the fixed header */
+  top: 5rem;      /* align just below the fixed header */
   left: 0;
   width: 100%;
   z-index: 1001;    /* remain on top */
