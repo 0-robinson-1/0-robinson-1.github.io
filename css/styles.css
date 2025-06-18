@@ -99,7 +99,7 @@ header {
   background-repeat: no-repeat;
   background-size: auto 92%;
   overflow: hidden;
-  touch-action: none;
+  touch-action: auto;
   height: calc(100vh - 4rem);
 }
 
