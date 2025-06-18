@@ -239,14 +239,14 @@ html {
 .visitor-counter {
   position: relative;
   z-index: 1;
-  margin-top: 5rem;  /* adjust as needed */
+  margin-top: -10rem;  /* adjust as needed */
   text-align: center;
   color: white;
 }
 
 /* Gallery image responsiveness */
 .gallery img {
-  width: 100%;
+  width: auto;
   height: auto;
 }
 
