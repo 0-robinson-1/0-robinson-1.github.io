@@ -237,9 +237,11 @@ html {
   }
 
 .visitor-counter {
-  position: relative;
-  z-index: 1001;       /* ensure it sits above the navbar */
-  margin-top: 2.7rem;   /* push it below the fixed header */
+  position: absolute;
+  top: 2.7rem;      /* align just below the fixed header */
+  left: 0;
+  width: 100%;
+  z-index: 1001;    /* remain on top */
   text-align: center;
   color: white;
 }
