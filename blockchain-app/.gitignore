@@ -22,8 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# macOS folder metadata
-.DS_Store
-
-/blockchain-app/node_modules/
