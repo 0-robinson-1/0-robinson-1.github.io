@@ -1,7 +1,8 @@
 // src/components/AirdropBalance.tsx
 import React, { useState, useEffect } from 'react'
-import { connection, LAMPORTS_PER_SOL } from '../solana'
+import { connection } from '../solana'
 import { useWallet } from '../contexts/WalletContext'
+import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 export default function AirdropBalance() {
   const { keypair } = useWallet()
