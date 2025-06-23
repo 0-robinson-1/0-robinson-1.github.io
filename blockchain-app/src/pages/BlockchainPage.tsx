@@ -3,6 +3,7 @@ import React from 'react'
 import { useWallet } from '../contexts/WalletContext'
 import WalletGate from '../components/WalletGate'
 import AirdropBalance from '../components/AirdropBalance'
+import SendSol from '../components/SendSol'
 
 export default function BlockchainPage() {
   const { keypair } = useWallet()
@@ -15,7 +16,7 @@ export default function BlockchainPage() {
       {keypair && (
         <>
           <AirdropBalance />
-          {/* next: <SendSol /> here */}
+        <SendSol />
         </>
       )}
     </div>
