@@ -15,7 +15,7 @@ function App() {
 
       <main className="app-main">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<BlockchainPage />} />
           <Route path="/blockchain" element={<BlockchainPage />} />
         </Routes>
       </main>

@@ -37,7 +37,14 @@ export default function AirdropBalance() {
       const lamports = await connection.getBalance(keypair.publicKey)
       setBalance(lamports / LAMPORTS_PER_SOL)
     } catch (err: any) {
-      setError(err.message)
+      // handle the Devnet‐faucet 429 specifically:
+      if (err?.error?.code === 429) {
+        setError(
+          'Airdrop limit reached on Devnet. Try the manual faucet: https://faucet.solana.com'
+        )
+      } else {
+        setError(err.message)
+      }
     } finally {
       setLoading(false)
     }
