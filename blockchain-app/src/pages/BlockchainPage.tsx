@@ -16,7 +16,7 @@ export default function BlockchainPage() {
       {keypair && (
         <>
           <AirdropBalance />
-        <SendSol />
+          <SendSol />
         </>
       )}
     </div>
