@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <header className="app-header">
         <nav>
-          <Link to="/">Home</Link> |{' '}
+          <a href="/">Home</a> |{' '}
           <Link to="/blockchain">Blockchain Demo</Link>
         </nav>
       </header>
