@@ -265,3 +265,42 @@ html {
   background-position: center;
   z-index: 0;
 }
+
+/* Styles for the blockchain demo page */
+.blockchain-page {
+  background-color: #f9fafb;
+  padding: 2rem 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(110, 70, 254, 0.05);
+}
+.blockchain-page h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  color: #002a4e;
+  text-align: center;
+}
+.blockchain-page button {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: #00a2d8; /* match site’s primary color */
+  color: #ffffff;            /* white text */
+  border: none;              /* no border */
+  padding: 0.75rem;          /* comfortable click area */
+  font-size: 1rem;           /* standard text size */
+  cursor: pointer;           /* pointer on hover */
+  border-radius: 4px;        /* slight rounding */
+}
+.blockchain-page input,
+.blockchain-page select {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+}
+.blockchain-page p {
+  text-align: center;
+  color: #333;
+}

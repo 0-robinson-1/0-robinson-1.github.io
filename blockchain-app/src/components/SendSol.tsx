@@ -10,16 +10,10 @@ import {
 } from '@solana/web3.js'
 import { useWallet } from '../contexts/WalletContext'
 
-// Example recipients; replace with actual Devnet public keys
-const demoRecipients = [
-  '3qiNtjtE2VDnDcVuGgbFU7P3KTh5FKhXFTg1qZAc4wvW',
-  '9xQeWvG816bUx9EEzMwWwwEDtKxjKXxo9TXo3K5iU7mm',
-  '4Nd1mSZ5N4gxZzYXeXpPZUZDPEvsuH3w4iwUXdak4o7g'
-]
 
 export default function SendSol() {
   const { keypair } = useWallet()
-  const [recipient, setRecipient] = useState(demoRecipients[0])
+  const [recipient, setRecipient] = useState('')
   const [amount, setAmount]       = useState(0.1)
   const [status, setStatus]       = useState<string | null>(null)
   const [sending, setSending]     = useState(false)
@@ -49,13 +43,15 @@ export default function SendSol() {
   return (
     <div style={{ marginTop: '2rem' }}>
       <h4>Send SOL</h4>
-      <label>
-        Recipient:{' '}
-        <select value={recipient} onChange={e => setRecipient(e.target.value)}>
-          {demoRecipients.map(pk => (
-            <option key={pk} value={pk}>{pk}</option>
-          ))}
-        </select>
+      <label style={{ display: 'block', marginBottom: '0.75rem' }}>
+        Recipient Public Key:
+        <input
+          type="text"
+          placeholder="Paste recipient address"
+          value={recipient}
+          onChange={e => setRecipient(e.target.value)}
+          style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+        />
       </label>
       <label style={{ marginLeft: '1rem' }}>
         Amount:{' '}
@@ -69,7 +65,7 @@ export default function SendSol() {
       </label>
       <button
         onClick={onSend}
-        disabled={sending || amount <= 0}
+        disabled={sending || amount <= 0 || !recipient}
         style={{ marginLeft: '1rem' }}
       >
         {sending ? 'Sending…' : 'Send'}

@@ -9,7 +9,7 @@ export default function BlockchainPage() {
   const { keypair } = useWallet()
 
   return (
-    <div style={{ padding: '1rem', maxWidth: 400, margin: '0 auto' }}>
+    <div className="blockchain-page" style={{ padding: '1rem', maxWidth: 400, margin: '0 auto' }}>
       <h2>RobinSon Test Blockchain</h2>
       <WalletGate />
 
