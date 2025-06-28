@@ -27,3 +27,6 @@ dist-ssr
 .DS_Store
 
 /blockchain-app/node_modules/
+
+# Environment variables
+.env
