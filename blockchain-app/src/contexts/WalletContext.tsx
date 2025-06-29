@@ -1,7 +1,7 @@
-// src/contexts/WalletContext.tsx
 import React, { createContext, useContext, useState } from 'react';
 import { Keypair, PublicKey } from '@solana/web3.js';
 import { decryptSecret, encryptSecret } from '../utils/encryption';
+import { saveWallet } from '../storage';
 
 interface WalletContextValue {
   keypair: Keypair | null;
@@ -21,6 +21,14 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     const encrypted = await encryptSecret(newWallet.secretKey, password);
     localStorage.setItem('robinson-wallet', encrypted);
     setKeypair(newWallet);
+    // Persist this wallet to Azure Blob Storage
+    await saveWallet(
+      newWallet.publicKey.toBase58(),
+      {
+        publicKey: newWallet.publicKey.toBase58(),
+        secretKey: Array.from(newWallet.secretKey),
+      }
+    );
   };
 
   const login = async (password: string) => {
