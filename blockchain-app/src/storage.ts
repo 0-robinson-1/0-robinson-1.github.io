@@ -1,27 +1,20 @@
 // src/storage.ts
-import { BlobServiceClient } from "@azure/storage-blob";
-
-
-// Ensure your .env has VITE_ prefixes so Vite can inject these:
-const connectionString = import.meta.env.VITE_AZURE_STORAGE_CONNECTION_STRING!;
-const containerName    = import.meta.env.VITE_AZURE_STORAGE_CONTAINER_NAME!;
-
-const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
-const containerClient   = blobServiceClient.getContainerClient(containerName);
-
-// Ensure the container exists before any upload
-async function ensureContainerExists() {
-  await containerClient.createIfNotExists();
-}
 
 /**
- * Persist wallet data to Azure Blob Storage under wallets/<id>.json
+ * Persist wallet data by POSTing to Node server.
  */
 export async function saveWallet(id: string, data: object) {
-  await ensureContainerExists();
-  const blobClient = containerClient.getBlockBlobClient(`wallets/${id}.json`);
-  const content = Buffer.from(JSON.stringify(data));
-  await blobClient.upload(content, content.length);
-}
+  const res = await fetch('/api/save-wallet', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id, data }),
+  });
 
-export { containerClient };
+  if (!res.ok) {
+    // Try to read an error message from the response body
+    const err = await res.json().catch(() => null);
+    throw new Error(err?.error || res.statusText);
+  }
+
+  return res.json(); // { success: true } (or whatever your server returns)
+}

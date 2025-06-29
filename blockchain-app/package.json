@@ -13,6 +13,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.27.0",
     "@solana/web3.js": "^1.98.2",
     "bs58": "^6.0.0",
     "react": "^19.1.0",
