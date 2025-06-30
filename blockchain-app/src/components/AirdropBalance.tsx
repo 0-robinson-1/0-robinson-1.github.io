@@ -1,5 +1,5 @@
 // src/components/AirdropBalance.tsx
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { connection } from '../solana'
 import { useWallet } from '../contexts/WalletContext'
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'

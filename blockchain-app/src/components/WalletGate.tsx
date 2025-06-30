@@ -1,5 +1,5 @@
 // src/components/WalletGate.tsx
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useWallet } from '../contexts/WalletContext'
 
 export default function WalletGate() {
