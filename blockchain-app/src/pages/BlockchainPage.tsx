@@ -1,11 +1,18 @@
 // src/pages/BlockchainPage.tsx
-import { useWallet } from '../contexts/WalletContext'
-import WalletGate from '../components/WalletGate'
-import AirdropBalance from '../components/AirdropBalance'
-import SendSol from '../components/SendSol'
+import { useWallet } from '../contexts/WalletContext';
+import WalletGate from '../components/WalletGate';
+import AirdropBalance from '../components/AirdropBalance';
+import SendSol from '../components/SendSol';
+
+// src/storage.ts
+export async function getWallet(id: string) {
+  const res = await fetch(`/api/get-wallet/${encodeURIComponent(id)}`);
+  if (!res.ok) throw new Error('Failed to fetch wallet');
+  return res.json();
+}
 
 export default function BlockchainPage() {
-  const { keypair } = useWallet()
+  const { keypair } = useWallet();
 
   return (
     <div className="blockchain-page" style={{ padding: '1rem', maxWidth: 400, margin: '0 auto' }}>
@@ -19,5 +26,10 @@ export default function BlockchainPage() {
         </>
       )}
     </div>
-  )
+  );
+}
+export async function listWallets() {
+  const res = await fetch('/api/list-wallets');
+  if (!res.ok) throw new Error('Failed to list wallets');
+  return res.json();
 }
