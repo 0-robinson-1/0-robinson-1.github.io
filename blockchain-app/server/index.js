@@ -23,10 +23,11 @@ const containerClient = blobServiceClient.getContainerClient(
   process.env.AZURE_STORAGE_CONTAINER_NAME
 );
 
-// Ensure the container exists
+// Ensure the container exists on startup
 async function ensureContainer() {
   await containerClient.createIfNotExists();
 }
+ensureContainer().catch(console.error);
 
 app.post("/api/save-wallet", async (req, res) => {
   const { id, data } = req.body;
@@ -34,7 +35,6 @@ app.post("/api/save-wallet", async (req, res) => {
     return res.status(400).json({ error: "Missing id or data" });
   }
   try {
-    await ensureContainer();
     const blob = containerClient.getBlockBlobClient(`wallets/${id}.json`);
     const content = Buffer.from(JSON.stringify(data));
     await blob.upload(content, content.length);
@@ -56,7 +56,7 @@ app.get('/api/get-wallet/:id', async (req, res) => {
     res.json(data);
   } catch (e) {
     console.error("Download error:", e);
-    res.status(404).json({ error: 'Wallet not found' }); 
+    res.status(404).json({ error: "Wallet not found" });
   }
 });
 
@@ -66,13 +66,13 @@ app.get('/api/list-wallets', async (_req, res) => {
     const iter = containerClient.listBlobsFlat({ prefix: 'wallets/' });
     const ids = [];
     for await (const blob of iter) {
-      const name = blob.name.replace(/^wallets\/(.+)\.json$/, '$1');
+      const name = blob.name.replace(/^wallets\//, '').replace(/\.json$/, '');
       ids.push(name);
     }
     res.json(ids);
   } catch (e) {
     console.error("List error:", e);
-    res.status(500).json({ error: 'Could not list wallets' });
+    res.status(500).json({ error: "Could not list wallets" });
   }
 });
 
