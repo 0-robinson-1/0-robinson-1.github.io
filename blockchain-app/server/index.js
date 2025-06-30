@@ -10,6 +10,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Health-check endpoint
+app.get('/', (req, res) => {
+  res.send('✅ Server is running');
+});
+
 // Pull in your connection string and container name
 const blobServiceClient = BlobServiceClient.fromConnectionString(
   process.env.AZURE_STORAGE_CONNECTION_STRING
