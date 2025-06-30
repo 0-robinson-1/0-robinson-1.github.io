@@ -40,3 +40,8 @@
 .read-the-docs {
   color: #888;
 }
+
+/* White text for home page Blockchain App */
+.home-text {
+  color: white;
+}
