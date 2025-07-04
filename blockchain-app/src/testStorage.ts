@@ -1,10 +1,18 @@
-import { containerClient } from "./storage";
+import { listWallets, getWallet } from './storage';
 
-async function listBlobs() {
-  console.log("Blobs in container:");
-  for await (const blob of containerClient.listBlobsFlat()) {
-    console.log("  –", blob.name);
+async function testStorage() {
+  console.log('Testing storage API...');
+  try {
+    const wallets = await listWallets();
+    console.log('Available wallets:', wallets);
+
+    for (const id of wallets) {
+      const walletData = await getWallet(id);
+      console.log(`Data for wallet ${id}:`, walletData);
+    }
+  } catch (error) {
+    console.error('Storage test error:', error);
   }
 }
 
-listBlobs().catch(console.error);
+testStorage().catch(console.error);

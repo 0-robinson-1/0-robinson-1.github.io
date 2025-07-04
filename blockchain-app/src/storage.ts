@@ -25,6 +25,21 @@ export async function saveWallet(data: object): Promise<SaveResult> {
 export interface WalletData { [key: string]: any }
 
 /**
+ * A blob representing an encrypted wallet stored remotely.
+ */
+export interface WalletBlob {
+  alias: string;
+  publicKey: string;
+  secretKey: string;
+}
+
+/**
+ * Information about a stored wallet, e.g. its alias or ID.
+ * Here, listWallets returns an array of wallet IDs (strings).
+ */
+export type WalletInfo = string;
+
+/**
  * Load one wallet by ID.
  */
 export async function getWallet(id: string): Promise<WalletData> {

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Keypair, PublicKey } from '@solana/web3.js';
 import { decryptSecret, encryptSecret } from '../utils/encryption';
-import { saveWallet, getWallet, listWallets } from '../storage';
+import { saveWallet, getWallet, listWallets, type WalletBlob } from '../storage';
 
 interface WalletContextValue {
   keypair: Keypair | null;
@@ -9,7 +9,7 @@ interface WalletContextValue {
   createWallet: (password: string) => Promise<void>;
   login: (id: string, password: string) => Promise<void>;
   logout: () => void;
-  listWallets: () => Promise<string[]>;
+  getStoredWallets: () => Promise<string[]>;
 }
 
 const WalletContext = createContext<WalletContextValue | undefined>(undefined);
@@ -19,33 +19,29 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
   const createWallet = async (password: string) => {
     const newWallet = Keypair.generate();
-    const encrypted = await encryptSecret(newWallet.secretKey, password);
+    const encryptedSecret = await encryptSecret(newWallet.secretKey, password);
     setKeypair(newWallet);
-    // Persist this wallet to Azure Blob Storage
-    await saveWallet(
-      newWallet.publicKey.toBase58(),
-      {
-        publicKey: newWallet.publicKey.toBase58(),
-        secretKey: Array.from(newWallet.secretKey),
-      }
-    );
+    const blob: WalletBlob = {
+      alias: newWallet.publicKey.toBase58(),
+      publicKey: newWallet.publicKey.toBase58(),
+      secretKey: encryptedSecret,
+    };
+    await saveWallet(blob);
   };
 
   const login = async (id: string, password: string) => {
     const walletData = await getWallet(id);
-    const secretKeyArray = walletData.secretKey as number[];
-    const secretKey = Uint8Array.from(secretKeyArray);
-    const decrypted = await decryptSecret(secretKey, password);
+    const encryptedSecret = walletData.secretKey as string;
+    const decrypted = await decryptSecret(encryptedSecret, password);
     const wallet = Keypair.fromSecretKey(decrypted);
     setKeypair(wallet);
   };
 
   const logout = () => {
     setKeypair(null);
-    // leave encrypted blob in localStorage for future logins
+    // Keep the encrypted blob for future logins if needed
   };
 
-  // Expose listing of wallets
   const listAllWallets = () => listWallets();
 
   const value: WalletContextValue = {
@@ -54,7 +50,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     createWallet,
     login,
     logout,
-    listWallets: listAllWallets,
+    getStoredWallets: listAllWallets,
   };
 
   return (
@@ -66,6 +62,6 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
 export function useWallet() {
   const ctx = useContext(WalletContext);
-  if (!ctx) throw new Error('useWallet must be inside WalletProvider');
+  if (!ctx) throw new Error('useWallet must be used within WalletProvider');
   return ctx;
 }
