@@ -10,12 +10,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Health-check endpoint
-app.get('/', (req, res) => {
-  res.send('✅ Server is running');
-});
+// Health-check
+app.get("/", (_req, res) => res.send("✅ Server running"));
 
-// Pull in your connection string and container name
+// Azure setup
 const blobServiceClient = BlobServiceClient.fromConnectionString(
   process.env.AZURE_STORAGE_CONNECTION_STRING
 );
@@ -23,51 +21,66 @@ const containerClient = blobServiceClient.getContainerClient(
   process.env.AZURE_STORAGE_CONTAINER_NAME
 );
 
-// Ensure the container exists on startup
+// Ensure container exists once
 async function ensureContainer() {
   await containerClient.createIfNotExists();
 }
 ensureContainer().catch(console.error);
 
+// Save wallet
 app.post("/api/save-wallet", async (req, res) => {
-  const { id, data } = req.body;
-  if (!id || !data) {
-    return res.status(400).json({ error: "Missing id or data" });
+  const { data } = req.body;
+  const { publicKey: id, alias } = data;
+  if (!id || !data || !alias) {
+    return res.status(400).json({ error: "Missing id, data, or alias" });
   }
   try {
-    const blob = containerClient.getBlockBlobClient(`wallets/${id}.json`);
-    const content = Buffer.from(JSON.stringify(data));
-    await blob.upload(content, content.length);
+    // <-- FIXED: store at container root
+    const blobClient = containerClient.getBlockBlobClient(`${id}.json`);
+    const content   = Buffer.from(JSON.stringify(data));
+    await blobClient.upload(content, content.length, {
+      metadata: { alias }
+    });
     res.json({ success: true });
-  } catch (err) {
-    console.error("Upload error:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Get a single wallet by ID
-app.get('/api/get-wallet/:id', async (req, res) => {
-  const { id } = req.params;
-  try {
-    const blobClient = containerClient.getBlockBlobClient(`wallets/${id}.json`);
-    const downloadBuffer = await blobClient.downloadToBuffer();
-    const text = downloadBuffer.toString();
-    const data = JSON.parse(text);
-    res.json(data);
   } catch (e) {
-    console.error("Download error:", e);
-    res.status(404).json({ error: "Wallet not found" });
+    console.error("Upload error:", e);
+    res.status(500).json({ error: e.message });
   }
 });
 
-// List all wallet IDs
-app.get('/api/list-wallets', async (_req, res) => {
+// Get one wallet
+app.get("/api/get-wallet/:id", async (req, res) => {
+  const { id } = req.params;
+  async function fetchBlob(path) {
+    const client = containerClient.getBlockBlobClient(path);
+    const buffer = await client.downloadToBuffer();
+    return buffer.toString();
+  }
+
   try {
-    const iter = containerClient.listBlobsFlat({ prefix: 'wallets/' });
+    // Try root path first
+    const text = await fetchBlob(`${id}.json`);
+    return res.json(JSON.parse(text));
+  } catch (_) {
+    try {
+      // Fallback to old prefix
+      const text = await fetchBlob(`wallets/${id}.json`);
+      return res.json(JSON.parse(text));
+    } catch (e) {
+      console.error("Download error:", e);
+      return res.status(404).json({ error: "Wallet not found" });
+    }
+  }
+});
+
+// List all wallets
+app.get("/api/list-wallets", async (_req, res) => {
+  try {
+    // <-- FIXED: list at container root
+    const iter = containerClient.listBlobsFlat();
     const ids = [];
     for await (const blob of iter) {
-      const name = blob.name.replace(/^wallets\//, '').replace(/\.json$/, '');
-      ids.push(name);
+      ids.push(blob.name.replace(/\.json$/, ""));
     }
     res.json(ids);
   } catch (e) {
@@ -77,6 +90,6 @@ app.get('/api/list-wallets', async (_req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🟢 Server listening on http://localhost:${PORT}`);
-});
+app.listen(PORT, () =>
+  console.log(`🟢 Server listening on http://localhost:${PORT}`)
+);
