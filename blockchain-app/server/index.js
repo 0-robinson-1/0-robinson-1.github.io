@@ -67,8 +67,15 @@ app.get("/api/get-wallet/:id", async (req, res) => {
       // Fallback to old prefix
       const text = await fetchBlob(`wallets/${id}.json`);
       return res.json(JSON.parse(text));
-    } catch (e) {
-      console.error("Download error:", e);
+    } catch (secondErr) {
+      // Metadata fallback: find any blob whose metadata.alias matches
+      for await (const blob of containerClient.listBlobsFlat()) {
+        if (blob.metadata?.alias === id) {
+          const text = await fetchBlob(blob.name);
+          return res.json(JSON.parse(text));
+        }
+      }
+      console.error("Download error:", secondErr);
       return res.status(404).json({ error: "Wallet not found" });
     }
   }
