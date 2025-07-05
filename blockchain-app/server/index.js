@@ -58,37 +58,47 @@ app.get("/api/get-wallet/:id", async (req, res) => {
     return buffer.toString();
   }
 
+  // Try the simple path first
   try {
-    // Try root path first
     const text = await fetchBlob(`${id}.json`);
     return res.json(JSON.parse(text));
-  } catch (_) {
-    try {
-      // Fallback to old prefix
-      const text = await fetchBlob(`wallets/${id}.json`);
+  } catch (primaryErr) {
+    console.debug(`Primary fetch failed for ${id}.json:`, primaryErr.message);
+  }
+
+  // Fallback: find by metadata.alias or embedded alias in blob content
+  for await (const blob of containerClient.listBlobsFlat({ includeMetadata: true })) {
+    // Check metadata first
+    if (blob.metadata?.alias === id) {
+      const text = await fetchBlob(blob.name);
       return res.json(JSON.parse(text));
-    } catch (secondErr) {
-      // Metadata fallback: find any blob whose metadata.alias matches
-      for await (const blob of containerClient.listBlobsFlat()) {
-        if (blob.metadata?.alias === id) {
-          const text = await fetchBlob(blob.name);
-          return res.json(JSON.parse(text));
-        }
+    }
+    // Check inside blob JSON
+    try {
+      const content = await fetchBlob(blob.name);
+      const data = JSON.parse(content);
+      if (data.alias === id) {
+        return res.json(data);
       }
-      console.error("Download error:", secondErr);
-      return res.status(404).json({ error: "Wallet not found" });
+    } catch {
+      // skip parse errors
     }
   }
+
+  console.error("Wallet not found:", id);
+  return res.status(404).json({ error: "Wallet not found" });
 });
 
 // List all wallets
 app.get("/api/list-wallets", async (_req, res) => {
   try {
-    // <-- FIXED: list at container root
-    const iter = containerClient.listBlobsFlat();
+    // Include metadata so we can list the user-defined alias if set
+    const iter = containerClient.listBlobsFlat({ includeMetadata: true });
     const ids = [];
     for await (const blob of iter) {
-      ids.push(blob.name.replace(/\.json$/, ""));
+      // Prefer the alias metadata, fall back to filename
+      const alias = blob.metadata?.alias || blob.name.replace(/\.json$/, "");
+      ids.push(alias);
     }
     res.json(ids);
   } catch (e) {
