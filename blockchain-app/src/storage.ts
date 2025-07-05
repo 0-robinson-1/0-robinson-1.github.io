@@ -5,12 +5,15 @@ export interface SaveResult { success: true }
 /**
  * Persist wallet data by POSTing to Node server.
  */
-export async function saveWallet(data: object): Promise<SaveResult> {
+export async function saveWallet(blob: WalletBlob): Promise<SaveResult> {
   try {
     const res = await fetch('/api/save-wallet', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data }),
+      body: JSON.stringify({
+        id: blob.alias,
+        data: blob
+      }),
     });
     if (!res.ok) {
       const errBody = await res.json().catch(() => null);
