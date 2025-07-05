@@ -28,7 +28,7 @@ export default function WalletGate() {
     setError(null);
     try {
       if (mode === 'create') {
-        await createWallet(password);
+        await createWallet(alias, password);
       } else {
         await login(alias, password);
       }
