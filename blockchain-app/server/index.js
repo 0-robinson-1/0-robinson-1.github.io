@@ -30,7 +30,8 @@ ensureContainer().catch(console.error);
 // Save wallet
 app.post("/api/save-wallet", async (req, res) => {
   const { data } = req.body;
-  const { publicKey: id, alias } = data;
+  const { alias, publicKey } = data;
+  const id = alias;
   if (!id || !data || !alias) {
     return res.status(400).json({ error: "Missing id, data, or alias" });
   }
