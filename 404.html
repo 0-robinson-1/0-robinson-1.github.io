@@ -15,18 +15,12 @@
 <body class="error-page">
   <div id="site-nav"></div>
   <script>
-    fetch('/nav.html')
-      .then(res => res.text())
+    fetch('nav.html')
+      .then(r => r.text())
       .then(html => {
         document.getElementById('site-nav').innerHTML = html;
-        const current = window.location.pathname.split('/').pop() || 'index.html';
-        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-          if (link.getAttribute('href') === current) {
-            link.classList.add('active');
-          }
-        });
       })
-      .catch(err => console.error('Navbar load failed:', err));
+      .catch(console.error);
   </script>
 
   <main class="container mt-5 pt-5 text-center">

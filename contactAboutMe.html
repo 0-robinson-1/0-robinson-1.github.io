@@ -20,18 +20,17 @@
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="videos.html">Videos</a></li>
-        <li class="nav-item"><a class="nav-link" href="code.html">Code</a></li>
-        <li class="nav-item"><a class="nav-link" href="contactAboutMe.html">Contact & About Me</a></li>
-        <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
+  <div id="site-nav"></div>
+  <script>
+    fetch('nav.html')
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById('site-nav').innerHTML = html;
+      })
+      .catch(console.error);
+  </script>
+  
 <main class="container mt-5 pt-5">
   <div style="height: 70px;"></div>
 
