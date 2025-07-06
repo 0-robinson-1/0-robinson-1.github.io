@@ -1,0 +1,306 @@
+/* Bootstrap CSS Import */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css");
+
+/*────────────────────────────────────────────────────────
+  Global Site Header
+────────────────────────────────────────────────────────*/
+
+header.site-header {
+  /* make it span the full width and sit on top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);  /* semi-opaque white */
+  backdrop-filter: blur(6px);             /* nice frosted effect */
+  padding: 0.75rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+/* Flex container for brand + nav links */
+header .navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Your “logo” / site name */
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #003a6b;
+}
+
+/* Navigation list */
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item + .nav-item {
+  margin-left: 1.5rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #003a6b;
+  transition: color 0.2s;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #00a2d8;
+}
+
+/* Push page content below the fixed header */
+body {
+  padding-top: 2.7rem; /* match navbar height */
+}
+
+
+/* Global body styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #00a2d8;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Ensure header text remains visible above the image */
+header {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+  .navbar {
+    /* existing styles */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Gallery background */
+.gallery {
+  position: relative;
+  z-index: 0;
+  /* Use your actual image path here */
+  background-image: url('../images/Humpback_Whale_copy.jpg');
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: auto 92%;
+  overflow: hidden;
+  touch-action: auto;
+  height: calc(100vh - 4rem);
+}
+
+/* Make sure .gallery (your hero) fills the screen and hides overflow */
+.gallery{
+  min-height:100vh;
+  background-size:cover;
+  background-position:50% 50%;   /* centred focal point */
+  overflow:hidden;
+}
+
+/* Gallery responsive fallback image */
+.gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Remove extra Bootstrap spacing on the homepage main wrapper */
+main.container.mt-5.pt-5 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Videos page override */
+body.videos-page {
+  display: block;   /* disable flex centering */
+  height: fit-content;     /* remove full-height centering */
+  background-color: #00a2d8;
+  padding-top: 0rem; /* match header offset */
+}
+
+/* Full-width responsive video player */
+.video-player {
+  position: relative;
+  width: 100vw;
+  height: 0;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  margin: 4rem 0 0;     /* push below fixed header */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.video-player iframe,
+#player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Video thumbnail carousel */
+.video-playlist {
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0;
+  gap: 0.75rem;
+}
+.video-playlist .thumbnail {
+  flex: 0 0 auto;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.video-playlist .thumbnail:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.video-playlist .thumbnail.active {
+  border-color: #00a2d8;
+}
+.video-playlist .thumbnail img {
+  display: block;
+  width: 140px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Active nav link styling */
+.navbar-light .navbar-nav .nav-link.active {
+  background-color: rgba(0, 123, 255, 0.8);
+  color: #c3e7f7;
+  border-radius: 0.25rem;
+}
+
+/* Always reserve space for the vertical scrollbar to prevent layout shifts */
+html {
+  overflow-y: scroll;
+  /* or, if you prefer not to show a disabled scrollbar and your users are on modern browsers, you can use:
+  scrollbar-gutter: stable;
+  */
+}
+
+/* Exercise box styling */
+.exercise {
+  background-color: #9de0ff; /* very light blue */
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Center 404 page content vertically */
+.error-page main {
+  min-height: calc(100vh - 56px); /* subtract navbar height */
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Center thank-you page content vertically */
+.thank-you-page main {
+  min-height: calc(100vh - 56px); /* subtract navbar height */
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+  /* Position and style the status message */
+  .status-message {
+    position: fixed;
+    left: 10rem;        /* distance from left edge */
+    bottom: 1rem;      /* distance from bottom edge */
+    color: #fff;       /* white text */
+    font-size: 1.2rem; /* slightly bigger than normal */
+    line-height: 1.4;  /* good spacing between lines */
+    text-shadow: 0 0 3px rgba(0,0,0,0.7); /* optional: improve readability */
+    z-index: 1000;     /* make sure it sits on top */
+  }
+
+.visitor-counter {
+  position: absolute;
+  top: 5rem;      /* align just below the fixed header */
+  left: 0;
+  width: 100%;
+  z-index: 1001;    /* remain on top */
+  text-align: center;
+  color: white;
+}
+
+/* Gallery image responsiveness */
+.gallery img {
+  width: auto;
+  height: auto;
+}
+
+.background-image {
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/Humpback_Whale_copy.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+/* Styles for the blockchain demo page */
+.blockchain-page {
+  background-color: #f9fafb;
+  padding: 2rem 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(110, 70, 254, 0.05);
+}
+.blockchain-page h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  color: #002a4e;
+  text-align: center;
+}
+.blockchain-page button {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: #00a2d8; /* match site’s primary color */
+  color: #ffffff;            /* white text */
+  border: none;              /* no border */
+  padding: 0.75rem;          /* comfortable click area */
+  font-size: 1rem;           /* standard text size */
+  cursor: pointer;           /* pointer on hover */
+  border-radius: 4px;        /* slight rounding */
+}
+.blockchain-page input,
+.blockchain-page select {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+}
+.blockchain-page p {
+  text-align: center;
+  color: #333;
+}
