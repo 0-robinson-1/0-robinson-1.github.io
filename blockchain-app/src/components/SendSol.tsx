@@ -1,6 +1,7 @@
 // src/components/SendSol.tsx
 import { useState } from 'react'
 import { connection } from '../solana'
+console.log('Solana RPC endpoint →', (connection as any)._rpcEndpoint);
 import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import {
   Transaction,
