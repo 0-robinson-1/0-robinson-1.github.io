@@ -7,8 +7,8 @@ import BlockchainPage from './pages/BlockchainPage'
 function HomePage() {
   return (
     <div className="home-text" style={{ padding: '1rem', maxWidth: 600, margin: '0 auto' }}>
-      <h2>Welcome to RobinSon's Blockchain App</h2>
-      <p>Click "Blockchain" to play around with the RobinSon Blockchain:</p>
+      <h2>Welcome to Robinson's Blockchain App</h2>
+      <p>Click "Blockchain" to play around with the Robinson Blockchain:</p>
       <p>   -Create a wallet</p>
       <p>   -Airdrop yourself some free Solana Testnet Coins</p>
       <p>   -Send Sol to your friends and receive some back</p>
@@ -19,7 +19,7 @@ function HomePage() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/blockchain-app">
       <header className="app-header">
         <nav>
           <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link>
