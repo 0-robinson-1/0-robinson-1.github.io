@@ -19,7 +19,7 @@ function HomePage() {
 
 function App() {
   return (
-    <BrowserRouter basename="/blockchain-app">
+    <BrowserRouter basename="/blockchain">
       <header className="app-header">
         <nav>
           <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link>
