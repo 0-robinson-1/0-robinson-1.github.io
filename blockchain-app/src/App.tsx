@@ -22,7 +22,7 @@ function App() {
     <BrowserRouter basename="/blockchain">
       <header className="app-header">
         <nav>
-          <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link>
+          <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link> | <a href="/">Return to Main Site</a>
         </nav>
       </header>
 
