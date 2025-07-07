@@ -7,7 +7,21 @@ import { BlobServiceClient } from "@azure/storage-blob";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+// CORS configuration
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://0-robinson-1.github.io']
+  : ['http://localhost:5173'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // allow requests with no origin (e.g. mobile apps, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('CORS policy: Origin not allowed'));
+  }
+}));
 app.use(express.json());
 
 // Health-check
