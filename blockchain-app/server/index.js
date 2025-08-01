@@ -10,7 +10,7 @@ const app = express();
 // CORS configuration
 const allowedOrigins = process.env.NODE_ENV === 'production'
   ? ['https://0-robinson-1.github.io']
-  : ['http://localhost:5173'];
+  : ['http://localhost:5174'];
 
 app.use(cors({
   origin: (origin, callback) => {
