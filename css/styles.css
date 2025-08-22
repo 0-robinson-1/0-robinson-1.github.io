@@ -91,6 +91,15 @@ header {
     z-index: 1000;
 }
 
+  .dropdown-menu {
+    background-color: #f8f9fa; /* light gray to match your theme */
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .dropdown-item:hover {
+    background-color: #00a2d8; /* your primary blue */
+    color: #fff;
+  }
+
 /* Gallery background */
 .gallery {
   position: relative;
