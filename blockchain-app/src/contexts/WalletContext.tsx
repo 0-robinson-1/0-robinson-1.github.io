@@ -1,3 +1,5 @@
+// src/contexts/WalletContext.tsx
+
 import React, { createContext, useContext, useState } from 'react';
 import { Keypair, PublicKey } from '@solana/web3.js';
 import { decryptSecret, encryptSecret } from '../utils/encryption';
