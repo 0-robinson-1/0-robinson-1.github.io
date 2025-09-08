@@ -7,7 +7,7 @@
     "esm": true
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port $PORT",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
