@@ -19,7 +19,13 @@ function HomePage() {
 
 function App() {
   return (
-    <BrowserRouter basename="/blockchain">
+    <BrowserRouter 
+      basename="/blockchain"
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <header className="app-header">
         <nav>
           <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link> | <a href="/">Return to Main Site</a>
