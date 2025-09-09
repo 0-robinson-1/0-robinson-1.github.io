@@ -8,21 +8,29 @@ export default defineConfig(({ mode }) => ({
     react(),
     nodePolyfills({
       globals: {
-        Buffer: true,  // Polyfill Buffer for Solana
+        Buffer: true,
         global: true,
-        process: true,  // Include process for other Node.js globals
+        process: true,
       },
-      protocolImports: true,  // Polyfill Node modules like crypto
+      protocolImports: true,
     }),
   ],
   build: {
     outDir: 'dist',
   },
   server: {
-    open: '/blockchain/',
+    open: '/blockchain',  // Auto-open /blockchain
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',  // Proxy to Vercel functions port
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '/api'),  // Keep /api prefix
+      },
+    },
   },
   define: {
     'process.env': {},
-    global: 'globalThis',  // Standard globalThis for browser
+    global: 'globalThis',
   },
 }));
