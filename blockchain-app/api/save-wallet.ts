@@ -2,6 +2,8 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@vercel/kv';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log('save-wallet function called with body:', req.body); // debugging
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -19,6 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     await kv.set(`wallet:${id}`, JSON.stringify(data));
     return res.status(200).json({ success: true });
   } catch (error: any) {
+    console.error('Error in save-wallet:', error);  // Error logging
     return res.status(500).json({ error: `Failed to save wallet: ${error.message}` });
   }
 }
