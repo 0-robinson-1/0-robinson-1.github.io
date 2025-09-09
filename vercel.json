@@ -10,14 +10,18 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+"routes": [
     {
       "src": "/api/(.*)",
       "dest": "/blockchain-app/api/$1"
     },
     {
-      "src": "/(.*)",
+      "src": "/blockchain/(.*)",
       "dest": "/blockchain-app/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/blockchain-app/dist/index.html"  // Serve index.html at root for blank screen fix
     }
   ],
   "env": {

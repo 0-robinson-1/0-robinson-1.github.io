@@ -20,7 +20,7 @@ function HomePage() {
 function App() {
   return (
     <BrowserRouter 
-      basename="/blockchain"
+      basename="/"
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true

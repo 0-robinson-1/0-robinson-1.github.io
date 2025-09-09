@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/blockchain/' : '/',
+  base: mode === 'production' ? '/' : '/',
   plugins: [
     react(),
     nodePolyfills({
