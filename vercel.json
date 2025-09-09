@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "blockchain-app/dist/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "blockchain-app/api/**/*.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/blockchain-app/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/blockchain-app/dist/$1"
+    }
+  ],
+  "env": {
+    "KV_URL": "",
+    "KV_TOKEN": ""
+  }
+}
