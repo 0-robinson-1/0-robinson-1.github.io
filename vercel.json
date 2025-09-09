@@ -21,7 +21,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/blockchain-app/dist/index.html"  // Serve index.html at root for blank screen fix
+      "dest": "/blockchain-app/dist/index.html"
     }
   ],
   "env": {
