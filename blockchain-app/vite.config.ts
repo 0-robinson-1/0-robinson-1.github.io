@@ -19,7 +19,7 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
   },
   server: {
-    open: mode === 'production' ? '/blockchain/' : '/',
+    open: '/blockchain/',
   },
   define: {
     'process.env': {},
