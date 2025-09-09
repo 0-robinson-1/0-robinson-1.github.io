@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "buffer": "^6.0.3"
+  },
+  "devDependencies": {
+    "vite-plugin-node-polyfills": "^0.24.0"
   }
 }
