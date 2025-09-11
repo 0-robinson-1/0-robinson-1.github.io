@@ -100,7 +100,7 @@ header {
     color: #fff;
   }
 
-  .dropdown-menu .dropdown-item:hover {
+    .dropdown-menu .dropdown-item:hover {
   background-color: #00a2d8 !important;  /* Blue with !important to override any conflicts */
   color: #fff !important;  /* White text for visibility */
   opacity: 1 !important;  /* Ensure no transparency */
