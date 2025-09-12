@@ -57,6 +57,13 @@ header .navbar .container {
   color: #00a2d8;
 }
 
+.dropdown-menu .dropdown-item:hover {
+background-color: #00a2d8 !important;  /* Blue with !important to override any conflicts */
+color: #fff !important;  /* White text for visibility */
+opacity: 1 !important;  /* Ensure no transparency */
+transition: background-color 0.2s, color 0.2s;  /* Smooth transition */
+}
+
 /* Push page content below the fixed header */
 body {
   padding-top: 2.7rem; /* match navbar height */
