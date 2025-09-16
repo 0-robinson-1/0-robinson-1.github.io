@@ -23,9 +23,5 @@
       "src": "/(.*)",
       "dest": "/blockchain-app/dist/index.html"
     }
-  ],
-  "env": {
-    "KV_URL": "",
-    "KV_TOKEN": ""
-  }
+  ]
 }

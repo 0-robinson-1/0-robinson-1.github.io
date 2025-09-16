@@ -15,8 +15,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const kv = createClient({
-      url: process.env.KV_URL,
-      token: process.env.KV_TOKEN,
+      url: process.env.KV_REST_API_URL,
+      token: process.env.KV_REST_API_TOKEN,
     });
     await kv.set(`wallet:${id}`, JSON.stringify(data));
     return res.status(200).json({ success: true });
