@@ -5,6 +5,7 @@ export interface SaveResult { success: true }
 /**
  * Persist wallet data by POSTing to Node server.
  */
+// Updated API base for Vercel
 export async function saveWallet(blob: WalletBlob): Promise<SaveResult> {
   try {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://0-robinson-1-github-io.vercel.app/api'; // Fallback
