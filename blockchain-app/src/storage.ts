@@ -7,7 +7,8 @@ export interface SaveResult { success: true }
  */
 export async function saveWallet(blob: WalletBlob): Promise<SaveResult> {
   try {
-    const res = await fetch('/api/save-wallet', {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://0-robinson-1-github-io.vercel.app/api'; // Fallback
+    const res = await fetch(`${apiBaseUrl}/save-wallet`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
