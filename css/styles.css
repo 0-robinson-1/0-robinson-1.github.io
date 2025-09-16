@@ -57,6 +57,7 @@ header .navbar .container {
   color: #00a2d8;
 }
 
+/* Bug where dropdown items in blockchains nav bar go translucent instead of blue */
 .dropdown-menu .dropdown-item:hover {
 background-color: #00a2d8 !important;  /* Blue with !important to override any conflicts */
 color: #fff !important;  /* White text for visibility */
