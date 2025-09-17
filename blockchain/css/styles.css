@@ -57,6 +57,14 @@ header .navbar .container {
   color: #00a2d8;
 }
 
+/* Bug where dropdown items in blockchains nav bar go translucent instead of blue */
+.dropdown-menu .dropdown-item:hover {
+background-color: #00a2d8 !important;  /* Blue with !important to override any conflicts */
+color: #fff !important;  /* White text for visibility */
+opacity: 1 !important;  /* Ensure no transparency */
+transition: background-color 0.2s, color 0.2s;  /* Smooth transition */
+}
+
 /* Push page content below the fixed header */
 body {
   padding-top: 2.7rem; /* match navbar height */
@@ -90,6 +98,15 @@ header {
     width: 100%;
     z-index: 1000;
 }
+
+  .dropdown-menu {
+    background-color: #f8f9fa; /* light gray to match your theme */
+    border: 1px solid rgba(0, 0, 0, 0.15);
+  }
+  .dropdown-item:hover {
+    background-color: #00a2d8; /* your primary blue */
+    color: #fff;
+  }
 
 /* Gallery background */
 .gallery {
