@@ -2,23 +2,21 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@vercel/kv';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-// Add CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'https://0-robinson-1.github.io'); // Specific to your GH Pages origin; or use '*' for any origin (less secure)
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', 'https://0-robinson-1.github.io'); // Your frontend origin; or '*' for testing
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight OPTIONS request (browser sends this before POST)
+  // Handle preflight OPTIONS request
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
-
-  console.log('list-wallets function called'); // debugging
 
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-try {
+  try {
     const kv = createClient({
       url: process.env.KV_REST_API_URL,
       token: process.env.KV_REST_API_TOKEN,
