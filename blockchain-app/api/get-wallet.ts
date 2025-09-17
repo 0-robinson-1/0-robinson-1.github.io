@@ -3,7 +3,7 @@ import { createClient } from '@vercel/kv';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Add CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'https://0-robinson-1.github.io'); // Github pages Front end origin
+  res.setHeader('Access-Control-Allow-Origin', 'https://0-robinson-1.github.io'); // GH pages Front end origin
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 

@@ -3,7 +3,7 @@ import { createClient } from '@vercel/kv';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Add CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'https://0-robinson-1.github.io'); // Specific to your GH Pages origin; or use '*' for any origin (less secure)
+  res.setHeader('Access-Control-Allow-Origin', 'https://0-robinson-1.github.io'); // Specific to GH Pages origin; or use '*' for any origin (less secure)
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -11,7 +11,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
-  
+
   console.log('save-wallet function called with body:', req.body); // debugging
 
   if (req.method !== 'POST') {
