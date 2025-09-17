@@ -5,10 +5,10 @@ export interface SaveResult { success: true }
 /**
  * Persist wallet data by POSTing to Node server.
  */
-// Updated API base for Vercel
 export async function saveWallet(blob: WalletBlob): Promise<SaveResult> {
   try {
-  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'https://0-robinson-1-github-io.vercel.app/api'; // Fallback
+    const apiBaseUrl = 'https://0-robinson-1-github-io.vercel.app/api'; // Direct Vercel URL (no env needed)
+    console.log('Using API base for saveWallet:', apiBaseUrl); // Debug log to confirm update
     const res = await fetch(`${apiBaseUrl}/save-wallet`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -48,7 +48,9 @@ export type WalletInfo = string;
  * Load one wallet by ID.
  */
 export async function getWallet(id: string): Promise<WalletData> {
-  const res = await fetch(`/api/get-wallet/${encodeURIComponent(id)}`);
+  const apiBaseUrl = 'https://0-robinson-1-github-io.vercel.app/api'; // Direct Vercel URL
+  console.log('Using API base for getWallet:', apiBaseUrl); // Debug log
+  const res = await fetch(`${apiBaseUrl}/get-wallet/${encodeURIComponent(id)}`);
   if (!res.ok) throw new Error(`Failed to load wallet ${id}`);
   return res.json();
 }
@@ -57,7 +59,9 @@ export async function getWallet(id: string): Promise<WalletData> {
  * List all wallet IDs.
  */
 export async function listWallets(): Promise<string[]> {
-  const res = await fetch(`/api/list-wallets`);
+  const apiBaseUrl = 'https://0-robinson-1-github-io.vercel.app/api'; // Direct Vercel URL
+  console.log('Using API base for listWallets:', apiBaseUrl); // Debug log
+  const res = await fetch(`${apiBaseUrl}/list-wallets`);
   if (!res.ok) throw new Error(`Failed to list wallets`);
   return res.json();
 }
