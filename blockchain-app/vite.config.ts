@@ -2,8 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
-export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/' : '/',
+export default defineConfig({
   plugins: [
     react(),
     nodePolyfills({
@@ -15,22 +14,14 @@ export default defineConfig(({ mode }) => ({
       protocolImports: true,
     }),
   ],
-  build: {
-    outDir: 'dist',
-  },
+base: '/blockchain/', // For subfolder deployment
   server: {
-    open: '/blockchain',  // Auto-open /blockchain
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',  // Proxy to Vercel functions port
+        target: 'http://localhost:3000', // Keep for local dev if needed
         changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '/api'),  // Keep /api prefix
-      },
-    },
-  },
-  define: {
-    'process.env': {},
-    global: 'globalThis',
-  },
-}));
+        rewrite: (path) => path.replace(/^\/api/, '/api')
+      }
+    }
+  }
+})
