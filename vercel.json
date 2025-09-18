@@ -12,6 +12,10 @@
   ],
 "routes": [
     {
+      "src": "/api/get-wallet/(.*)",
+      "dest": "/blockchain-app/api/get-wallet.ts"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/blockchain-app/api/$1"
     },
