@@ -16,6 +16,10 @@
       "dest": "/blockchain-app/api/get-wallet.ts"
     },
     {
+      "src": "/api/list-wallet/(.*)",
+      "dest": "/blockchain-app/api/list-wallet.ts"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/blockchain-app/api/$1"
     },
