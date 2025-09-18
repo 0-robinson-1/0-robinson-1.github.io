@@ -10,14 +10,10 @@
       "use": "@vercel/node"
     }
   ],
-"routes": [
+  "routes": [
     {
       "src": "/api/get-wallet/(.*)",
       "dest": "/blockchain-app/api/get-wallet.ts"
-    },
-    {
-      "src": "/api/list-wallets/(.*)",
-      "dest": "/blockchain-app/api/list-wallets.ts"
     },
     {
       "src": "/api/(.*)",
