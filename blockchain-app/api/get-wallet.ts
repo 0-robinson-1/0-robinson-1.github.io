@@ -34,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (data === null) {
       return res.status(404).json({ error: 'Wallet not found' });
     }
-    return res.status(200).json(JSON.parse(data as string)); // Parse the stringified data
+    return res.status(200).json(JSON.parse(data as string));  // Parse the stringified data
   } catch (error: any) {
     console.error('Error in get-wallet:', error);
     return res.status(500).json({ error: `Failed to get wallet: ${error.message}` });
