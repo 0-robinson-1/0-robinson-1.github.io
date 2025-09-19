@@ -16,9 +16,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Extract ID from the catch-all slug (e.g., ['tester123'] for /api/get-wallet/tester123)
-  const slug = req.query.slug as string[];
-  const id = slug?.[0];  // First part of the path
+  // Use req.query.id for the dynamic path
+  const { id } = req.query as { id: string };
   console.log('get-wallet function called with id:', id);
 
   if (!id) {
