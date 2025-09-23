@@ -11,17 +11,25 @@ export default function AirdropBalance() {
   const [error, setError]     = useState<string | null>(null)
 
   // Fetch current balance whenever the keypair changes
-  useEffect(() => {
-    if (!keypair) return
-    ;(async () => {
-      try {
-        const lamports = await connection.getBalance(keypair.publicKey)
-        setBalance(lamports / LAMPORTS_PER_SOL)
-      } catch (err: any) {
-        setError(err.message)
-      }
-    })()
-  }, [keypair])
+useEffect(() => {
+  if (!keypair) {
+    console.log('No keypair available, skipping balance fetch'); // Add this
+    return;
+  }
+  ;(async () => {
+    console.log('Fetching balance for pubkey:', keypair.publicKey.toBase58());
+    console.log('Using RPC endpoint:', connection.rpcEndpoint);
+    try {
+      const lamports = await connection.getBalance(keypair.publicKey);
+      console.log('Raw lamports:', lamports);
+      setBalance(lamports / LAMPORTS_PER_SOL);
+      console.log('Calculated balance:', lamports / LAMPORTS_PER_SOL);
+    } catch (err: any) {
+      console.error('Balance fetch error:', err);
+      setError(err.message);
+    }
+  })();
+}, [keypair]);
 
   const handleAirdrop = async () => {
     if (!keypair) return
