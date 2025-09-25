@@ -304,3 +304,11 @@ html {
   text-align: center;
   color: #333;
 }
+
+/* Transaction status styling (for signatures and messages in SendSol.tsx) */
+.transaction-status {
+  text-align: center;
+  word-break: break-all;
+  margin: 0.5rem 0;
+  color: #333; /* Optional: Match your theme */
+}
