@@ -1,74 +1,43 @@
 // src/components/AirdropBalance.tsx
-import { useState, useEffect } from 'react';
-import { connection } from '../solana'
-import { useWallet } from '../contexts/WalletContext'
-import { LAMPORTS_PER_SOL } from '@solana/web3.js'
+import { useState } from 'react';
+import { useWallet } from '../contexts/WalletContext';
+import { connection } from '../solana';
 
-export default function AirdropBalance() {
-  const { keypair } = useWallet()
-  const [balance, setBalance] = useState<number | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError]     = useState<string | null>(null)
+interface AirdropBalanceProps {
+  balance: number | null;
+  error: string | null;
+  onRefresh: () => void;
+}
 
-  // Fetch current balance whenever the keypair changes
-useEffect(() => {
-  if (!keypair) {
-    console.log('No keypair available, skipping balance fetch'); // Add this
-    return;
-  }
-  ;(async () => {
-    console.log('Fetching balance for pubkey:', keypair.publicKey.toBase58());
-    console.log('Using RPC endpoint:', connection.rpcEndpoint);
-    try {
-      const lamports = await connection.getBalance(keypair.publicKey);
-      console.log('Raw lamports:', lamports);
-      setBalance(lamports / LAMPORTS_PER_SOL);
-      console.log('Calculated balance:', lamports / LAMPORTS_PER_SOL);
-    } catch (err: any) {
-      console.error('Balance fetch error:', err);
-      setError(err.message);
-    }
-  })();
-}, [keypair]);
+export default function AirdropBalance({ balance, error, onRefresh }: AirdropBalanceProps) {
+  const { keypair } = useWallet();
+  const [loading, setLoading] = useState(false);
 
   const handleAirdrop = async () => {
-    if (!keypair) return
-    setLoading(true)
-    setError(null)
+    if (!keypair) return;
+    setLoading(true);
     try {
-      const sig = await connection.requestAirdrop(
-        keypair.publicKey,
-        LAMPORTS_PER_SOL
-      )
-      await connection.confirmTransaction(sig, 'confirmed')
-      // Refresh balance
-      const lamports = await connection.getBalance(keypair.publicKey)
-      setBalance(lamports / LAMPORTS_PER_SOL)
+      const signature = await connection.requestAirdrop(keypair.publicKey, 1e9); // 1 SOL
+      await connection.confirmTransaction(signature);
+      onRefresh(); // Refresh balance after airdrop
     } catch (err: any) {
-      // handle the Devnet‐faucet 429 specifically:
-      if (err?.error?.code === 429) {
-        setError(
-          'Airdrop limit reached on Devnet. Try the manual faucet: https://faucet.solana.com'
-        )
-      } else {
-        setError(err.message)
-      }
+      // Handle error (you can add error state if needed)
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  if (!keypair) return null // hide when not logged in
+  if (!keypair) return null;
 
   return (
     <div style={{ marginTop: '1.5rem' }}>
-      <button onClick={handleAirdrop} disabled={loading}>
-        {loading ? 'Airdropping…' : 'Request 1 SOL Airdrop'}
-      </button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
       {balance !== null && (
-        <p>Your balance: <strong>{balance.toFixed(4)} SOL</strong></p>
+        <p>Your balance: {balance.toFixed(4)} SOL</p>
       )}
+      <button onClick={handleAirdrop} disabled={loading}>
+        {loading ? 'Requesting...' : 'Request 1 SOL Airdrop'}
+      </button>
     </div>
-  )
+  );
 }
