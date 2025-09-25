@@ -307,8 +307,8 @@ html {
 
 /* Transaction status styling (for signatures and messages in SendSol.tsx) */
 .transaction-status {
-  text-align: center;
-  word-break: break-all;
-  margin: 0.5rem 0;
+  text-align: center !important;
+  word-break: break-all !important;
+  margin: 0.5rem 0 !important;
   color: #333; /* Optional: Match your theme */
 }
