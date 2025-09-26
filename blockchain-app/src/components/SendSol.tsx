@@ -40,25 +40,11 @@ export default function SendSol({ onTransactionSuccess }: SendSolProps) {
 
     return (
       <div style={{ marginTop: '2rem' }}>
-{status && (
-  <p
-    className="transaction-status"
-    style={{
-      textAlign: 'center',
-      wordBreak: 'break-all',
-      overflowWrap: 'break-word',
-      whiteSpace: 'normal',
-      maxWidth: '100%',
-      margin: '0.5rem auto',
-      padding: '0 1rem',
-      boxSizing: 'border-box',
-      color: '#333',
-      fontFamily: 'monospace'
-    }}
-  >
-    {status}
-  </p>
-)}
+    {status && (
+      <p className="transaction-status">
+        {status}
+      </p>
+    )}
       <label>
         Recipient Public Key:
         <input

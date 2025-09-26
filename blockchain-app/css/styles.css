@@ -305,19 +305,19 @@ html {
   color: #333;
 }
 
-/* Transaction status styling (for signatures and messages in SendSol.tsx) */
-p.transaction-status,                /* Targets <p> specifically */
-.container p.transaction-status,     /* If inside Bootstrap .container */
-.card p.transaction-status,          /* If inside a Bootstrap card */
-.alert p.transaction-status {        /* If inside an alert */
+/* Transaction status styling - with blockchain-page specificity */
+.blockchain-page p.transaction-status,
+.blockchain-page .container p.transaction-status,
+.blockchain-page .card p.transaction-status,
+.blockchain-page .alert p.transaction-status {
   text-align: center !important;
-  word-break: break-all !important;  /* Breaks long sig strings */
-  overflow-wrap: break-word !important; /* Fallback for better compatibility */
+  word-break: break-all !important;
+  overflow-wrap: break-word !important;
   white-space: normal !important;
   max-width: 100% !important;
-  margin: 0.5rem auto !important;    /* Centers the <p> block */
-  padding: 0 1rem !important;        /* Adds breathing room */
+  margin: 0.5rem auto !important;
+  padding: 0 1rem !important;
   box-sizing: border-box !important;
   color: #333;
-  font-family: monospace;            /* Optional: Keeps sig looking code-like */
+  font-family: monospace;
 }
