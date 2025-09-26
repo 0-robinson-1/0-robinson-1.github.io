@@ -305,19 +305,20 @@ html {
   color: #333;
 }
 
-/* Transaction status styling - with blockchain-page specificity */
-.blockchain-page p.transaction-status,
-.blockchain-page .container p.transaction-status,
-.blockchain-page .card p.transaction-status,
-.blockchain-page .alert p.transaction-status {
+/* Transaction container for centering */
+.blockchain-page .transaction-container {
   text-align: center !important;
-  word-break: break-all !important;
-  overflow-wrap: break-word !important;
+}
+
+/* Transaction status for wrapping and display */
+.blockchain-page .transaction-status {
+  word-break: break-all !important;  /* Aggressively breaks long signatures */
+  overflow-wrap: break-word !important;  /* Fallback support */
   white-space: normal !important;
-  max-width: 100% !important;
-  margin: 0.5rem auto !important;
-  padding: 0 1rem !important;
+  max-width: 100% !important;  /* Prevents overflow */
+  margin: 0.5rem auto !important;  /* Centers the block */
+  padding: 0 1rem !important;  /* Adds edge spacing */
   box-sizing: border-box !important;
   color: #333;
-  font-family: monospace;
+  font-family: monospace;  /* Keeps code-like appearance */
 }
