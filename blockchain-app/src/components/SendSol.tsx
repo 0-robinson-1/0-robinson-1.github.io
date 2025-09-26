@@ -41,10 +41,10 @@ export default function SendSol({ onTransactionSuccess }: SendSolProps) {
     return (
       <div style={{ marginTop: '2rem' }}>
     {status && (
-      <p className="transaction-status">
+      <p className="transaction-status text-center text-break mx-auto">
         {status}
       </p>
-    )}
+  )}
       <label>
         Recipient Public Key:
         <input
