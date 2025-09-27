@@ -14,7 +14,8 @@ export default function WalletGate() {
     return (
       <div>
         <p>🔑 Logged in as {currentAlias}</p> {/* Display alias from database */}
-        <p>with public key <code style={{ wordBreak: 'break-all' }}>{keypair.publicKey.toBase58()}</code></p> {/* Public key on next line */}
+        <p>with public key</p>
+        <p> <code style={{ wordBreak: 'break-all' }}>{keypair.publicKey.toBase58()}</code></p> {/* Public key on next line */}
         <button onClick={logout}>Logout</button>
       </div>
     );
