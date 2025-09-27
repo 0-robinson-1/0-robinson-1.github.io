@@ -3,22 +3,18 @@ import { useState } from 'react';
 import { useWallet } from '../contexts/WalletContext';
 
 export default function WalletGate() {
-  const { keypair, createWallet, login, logout } = useWallet();
+  const { keypair, currentAlias, createWallet, login, logout } = useWallet(); // Added currentAlias to destructuring
   const [mode, setMode] = useState<'create' | 'login'>('create');
   const [alias, setAlias] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
   // If already logged in, show logout button
-  if (keypair) {
+  if (keypair && currentAlias) { // Added currentAlias check
     return (
       <div>
-        <p>
-          🔑 Logged in as{' '}
-          <code style={{ wordBreak: 'break-all' }}>
-            {keypair.publicKey.toBase58()}
-          </code>
-        </p>
+        <p>🔑 Logged in as {currentAlias}</p> {/* Display alias from database */}
+        <p>with public key <code style={{ wordBreak: 'break-all' }}>{keypair.publicKey.toBase58()}</code></p> {/* Public key on next line */}
         <button onClick={logout}>Logout</button>
       </div>
     );

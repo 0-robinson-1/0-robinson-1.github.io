@@ -8,6 +8,7 @@ import { saveWallet, getWallet, listWallets, type WalletBlob } from '../storage'
 interface WalletContextValue {
   keypair: Keypair | null;
   publicKey: PublicKey | null;
+  currentAlias: string | null; // Added to interface
   createWallet: (alias: string, password: string) => Promise<void>;
   login: (alias: string, password: string) => Promise<void>;
   logout: () => void;
@@ -18,11 +19,13 @@ const WalletContext = createContext<WalletContextValue | undefined>(undefined);
 
 export function WalletProvider({ children }: { children: React.ReactNode }) {
   const [keypair, setKeypair] = useState<Keypair | null>(null);
+  const [currentAlias, setCurrentAlias] = useState<string | null>(null); // Added state
 
   const createWallet = async (alias: string, password: string) => {
     const newWallet = Keypair.generate();
     const encryptedSecret = await encryptSecret(newWallet.secretKey, password);
     setKeypair(newWallet);
+    setCurrentAlias(alias); // Set alias on creation
     const blob: WalletBlob = {
       alias,
       publicKey: newWallet.publicKey.toBase58(),
@@ -37,10 +40,12 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     const decrypted = await decryptSecret(encryptedSecret, password);
     const wallet = Keypair.fromSecretKey(decrypted);
     setKeypair(wallet);
+    setCurrentAlias(walletData.alias); // Set from database
   };
 
   const logout = () => {
     setKeypair(null);
+    setCurrentAlias(null); // Clear alias
     // Keep the encrypted blob for future logins if needed
   };
 
@@ -49,6 +54,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
   const value: WalletContextValue = {
     keypair,
     publicKey: keypair?.publicKey ?? null,
+    currentAlias, // Added to value
     createWallet,
     login,
     logout,
