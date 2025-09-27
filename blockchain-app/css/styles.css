@@ -305,20 +305,9 @@ html {
   color: #333;
 }
 
-/* Transaction container for centering */
-.blockchain-page .transaction-container {
-  text-align: center !important;
-}
-
-/* Transaction status for wrapping and display */
-.blockchain-page .transaction-status {
-  word-break: break-all !important;  /* Aggressively breaks long signatures */
-  overflow-wrap: break-word !important;  /* Fallback support */
-  white-space: normal !important;
-  max-width: 100% !important;  /* Prevents overflow */
-  margin: 0.5rem auto !important;  /* Centers the block */
-  padding: 0 1rem !important;  /* Adds edge spacing */
-  box-sizing: border-box !important;
-  color: #333;
-  font-family: monospace;  /* Keeps code-like appearance */
+/* Transaction status styling for signatures in SendSol.tsx) */
+.transaction-status {
+  word-break: break-all;  /* Breaks long signatures to prevent overflow */
+  margin: 0.5rem 0;       /* Basic vertical spacing */
+  font-family: monospace;
 }

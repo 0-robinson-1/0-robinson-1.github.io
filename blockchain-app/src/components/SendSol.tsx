@@ -39,7 +39,7 @@ export default function SendSol({ onTransactionSuccess }: SendSolProps) {
   };
 
   return (
-    <div className="transaction-container" style={{ marginTop: '2rem' }}>
+    <div style={{ marginTop: '2rem' }}>
       {status && (
         <p className="transaction-status">
           {status}
