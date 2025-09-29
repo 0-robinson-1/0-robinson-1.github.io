@@ -109,7 +109,7 @@ header {
   }
 
 .background-image {
-  position: fixed;  /* Or 'absolute' if you want it to scroll; 'fixed' keeps it in place for a hero effect */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;  /* Full viewport width */
@@ -117,7 +117,7 @@ header {
   background-image: url('../images/Humpback_Whale.jpg');  /* Landscape default for desktop */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;  /* Fills the area; use 'contain' if no cropping wanted */
+  background-size: auto 80%;
   overflow: hidden;
   z-index: -1;  /* Behind all content */
 }
