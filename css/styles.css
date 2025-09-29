@@ -6,13 +6,13 @@
 ────────────────────────────────────────────────────────*/
 
 header.site-header {
-  /* make it span the full width and sit on top */
+  /* make header span the full width and sit on top */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.9);  /* semi-opaque white */
-  backdrop-filter: blur(6px);             /* nice frosted effect */
+  backdrop-filter: blur(6px);             /* frosted effect */
   padding: 0.75rem 2rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   z-index: 1000;
@@ -25,7 +25,7 @@ header .navbar .container {
   justify-content: space-between;
 }
 
-/* Your “logo” / site name */
+/* logo / site name */
 .navbar-brand {
   font-size: 1.5rem;
   font-weight: bold;
@@ -112,11 +112,10 @@ header {
 .gallery {
   position: relative;
   z-index: 0;
-  /* Use your actual image path here */
-  background-image: url('../images/Humpback_Whale_copy.jpg');
+  background-image: url('../images/Humpback_Whale.jpg');
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-size: auto 92%;
+  background-size: auto 80%;
   overflow: hidden;
   touch-action: auto;
   height: calc(100vh - 4rem);
@@ -277,8 +276,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/Humpback_Whale_copy.jpg');
-  background-size: cover;
+  background-image: url('../images/Humpback_Whale.jpg');
   background-position: center;
   z-index: 0;
 }
