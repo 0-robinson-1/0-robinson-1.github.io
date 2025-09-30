@@ -191,14 +191,6 @@ body.videos-page {
   border-radius: 0.25rem;
 }
 
-/* Always reserve space for the vertical scrollbar to prevent layout shifts */
-html {
-  overflow-y: scroll;
-  /* or, if you prefer not to show a disabled scrollbar and your users are on modern browsers, you can use:
-  scrollbar-gutter: stable;
-  */
-}
-
 /* Exercise box styling */
 .exercise {
   background-color: #9de0ff; /* very light blue */
