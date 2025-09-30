@@ -122,6 +122,20 @@ header {
   z-index: -1;  /* Behind all content */
 }
 
+/* Switch to vertical image on mobile/small screens */
+@media (max-width: 768px) {
+  .background-image {
+    background-image: url('../images/Humpback_Whale_vertical.jpg');
+  }
+}
+
+/* Target portrait orientation specifically */
+@media (orientation: portrait) {
+  .background-image {
+    background-image: url('../images/Humpback_Whale_vertical.jpg');
+  }
+}
+
 /* Remove extra Bootstrap spacing on the homepage main wrapper */
 main.container.mt-5.pt-5 {
   margin-top: 0 !important;
