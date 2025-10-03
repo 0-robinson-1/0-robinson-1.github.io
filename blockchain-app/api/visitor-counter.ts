@@ -14,11 +14,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     if (req.method === 'POST') {
       // Increment the count
-      await sql`UPDATE visitor_counter_db SET count = count + 1 WHERE id = 1;`;
+      await sql`UPDATE visitor_counter SET count = count + 1 WHERE id = 1;`;
       return res.status(200).json({ success: true });
     } else if (req.method === 'GET') {
       // Fetch the current count
-      const { rows } = await sql`SELECT count FROM visitor_counter_db WHERE id = 1;`;
+      const { rows } = await sql`SELECT count FROM visitor_counter WHERE id = 1;`;
       const currentCount = rows[0]?.count || 592;  // Fallback if no row
       return res.status(200).json({ count: currentCount });
     } else {
