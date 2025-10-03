@@ -122,6 +122,20 @@ header {
   z-index: -1;  /* Behind all content */
 }
 
+/* Switch to vertical image on mobile/small screens */
+@media (max-width: 768px) {
+  .background-image {
+    background-image: url('../images/Humpback_Whale_vertical.jpg');
+  }
+}
+
+/* Target portrait orientation specifically */
+@media (orientation: portrait) {
+  .background-image {
+    background-image: url('../images/Humpback_Whale_vertical.jpg');
+  }
+}
+
 /* Remove extra Bootstrap spacing on the homepage main wrapper */
 main.container.mt-5.pt-5 {
   margin-top: 0 !important;
@@ -189,14 +203,6 @@ body.videos-page {
   background-color: rgba(0, 123, 255, 0.8);
   color: #c3e7f7;
   border-radius: 0.25rem;
-}
-
-/* Always reserve space for the vertical scrollbar to prevent layout shifts */
-html {
-  overflow-y: scroll;
-  /* or, if you prefer not to show a disabled scrollbar and your users are on modern browsers, you can use:
-  scrollbar-gutter: stable;
-  */
 }
 
 /* Exercise box styling */
