@@ -8,9 +8,17 @@
     {
       "src": "blockchain-app/api/**/*.ts",
       "use": "@vercel/node"
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/api/visitor-counter",
+      "dest": "/api/visitor-counter.js"
+    },
     {
       "src": "/api/get-wallet/(.*)",
       "dest": "/blockchain-app/api/get-wallet.ts"
