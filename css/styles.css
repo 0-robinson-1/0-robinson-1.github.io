@@ -297,6 +297,6 @@ body.videos-page {
 
 /* Gallery page main content spacing */
 .gallery-main {
-  margin-top: 5rem !important;  /* Equivalent to mt-7, with !important to override conflicts */
-  padding-top: 5rem !important; /* Equivalent to pt-7, with !important to override conflicts */
+  margin-top: 3rem !important;  /* Equivalent to mt-7, with !important to override conflicts */
+  padding-top: 3rem !important; /* Equivalent to pt-7, with !important to override conflicts */
 }
