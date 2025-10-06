@@ -114,7 +114,7 @@ header {
   left: 0;
   width: 100vw;  /* Full viewport width */
   height: 100vh;  /* Full viewport height */
-  background-image: url('../images/Humpback_Whale.jpg');  /* Landscape default for desktop */
+  background-image: url('../images/humpback_whale_enhanced.png');  /* Landscape default for desktop */
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 80%;
