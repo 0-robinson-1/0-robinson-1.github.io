@@ -7,3 +7,6 @@ export const RPC_ENDPOINT = clusterApiUrl('testnet');
 
 // The shared connection object for all Solana calls
 export const connection = new Connection(RPC_ENDPOINT, 'confirmed');
+
+// Temporary debug log to confirm the endpoint
+console.log('Solana RPC endpoint →', RPC_ENDPOINT);
