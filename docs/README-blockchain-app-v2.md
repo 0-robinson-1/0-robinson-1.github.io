@@ -23,7 +23,7 @@ I then switched to test net and now things are stabler because test net itself i
 
 The issue that I am having is that when a user of my wallet requests an airdrop, half of the times it goes through and the user receives airdropped test net Sol. But the other times, the airdop fails because the public Solana faucet runs dry. It runs dry because a certain amount of test net Sol have allready been requested within a certain time frame, this is a mechanism to prevent abuse of the faucet. A couple of hours later the faucet gets reset and users can airdrop themselve test net Sol again, this in itself is good but during this down time users of my wallet can not request anymore Sol to send or pay the fees of their transactions with. This is a major flaw and needs to be addressed...
 
-Another issue I am having is that when a wallet has a balance of 0 Sol, that wallet will end up being deleted. So if a user of my blockchain-app sends out all their test net Sol, their wallet will be deleted and it can not be used anymore. This to needs fixing...
+Another issue I am having is that when a wallet has a balance of 0 Sol, that wallet will end up being deleted by the chain. So if a user of my blockchain-app sends out all their test net Sol, their wallet will be deleted and it can not be used anymore. This to needs fixing...
 
 ## 2. RobinSon Coins
 
@@ -33,4 +33,4 @@ I recently created a couple of RobinSon coins on Solana test net.
 I will use one of these coins to power my blockchain-app and have it be the coin that can get transferred in my wallet!
 
 ## Braindump
--Work on branch blockchain-app-v2
+-Work on branch "blockchain-app-v2"
