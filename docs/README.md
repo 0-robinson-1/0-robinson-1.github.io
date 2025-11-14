@@ -12,6 +12,8 @@ RobinSon
 
 ## Abstract
 
+The website 0-robinson-1.github.io is my coding portfolio, in it I created a blockchain-app where I build a wallet that runs on Solana test net. At the moment the users of my blockchain-app V1 can create their own wallet, request an airdrop for test net Sol, and send and receive test net Solana to other users of my blockchain-app (and all other wallets on Solana test net).
+
 ## 1. Introduction
 
 ## Braindump
