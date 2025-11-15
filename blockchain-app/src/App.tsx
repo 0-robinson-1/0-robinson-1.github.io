@@ -3,7 +3,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import BlockchainPage from './pages/BlockchainPage'
-import ReadmePage from './pages/ReadmePage';
 
 function HomePage() {
   return (
@@ -29,7 +28,7 @@ function App() {
     >
       <header className="app-header">
         <nav>
-          <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link> | <a href="https://raw.githubusercontent.com/0-robinson-1/0-robinson-1.github.io/main/docs/README-blockchain-app-v2.md">README</a> | <a href="/">Return to Main Site</a>
+          <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link> | <a href="https://github.com/0-robinson-1/0-robinson-1.github.io/blob/main/docs/README-blockchain-app-v2.md">README</a> | <a href="/">Return to Main Site</a>
         </nav>
       </header>
 
@@ -37,7 +36,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blockchain" element={<BlockchainPage />} />
-          <Route path="/readme" element={<ReadmePage />} />
         </Routes>
       </main>
     </BrowserRouter>

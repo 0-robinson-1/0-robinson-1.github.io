@@ -1,8 +1,3 @@
----
-layout: page
-title: RobinSon Blockchain-app V2
----
-
 # RobinSon Blockchain-app V2
 
 **Work in Progress**

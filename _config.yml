@@ -1,6 +1,0 @@
-title: Robinson's Portfolio
-description: Portfolio and Blockchain App
-theme: minima
-markdown: kramdown
-kramdown:
-  auto_ids: true
