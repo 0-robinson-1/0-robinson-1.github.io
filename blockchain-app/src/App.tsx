@@ -3,6 +3,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import BlockchainPage from './pages/BlockchainPage'
+import ReadmePage from './pages/ReadmePage';
 
 function HomePage() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/blockchain" element={<BlockchainPage />} />
+          <Route path="/readme" element={<ReadmePage />} />
         </Routes>
       </main>
     </BrowserRouter>
