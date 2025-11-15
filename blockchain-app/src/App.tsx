@@ -28,7 +28,7 @@ function App() {
     >
       <header className="app-header">
         <nav>
-          <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link> | <a href="/">Return to Main Site</a>
+          <Link to="/">Home</Link> | <Link to="/blockchain">Blockchain</Link> |<a href="https://github.com/0-robinson-1/0-robinson-1.github.io/blob/main/docs/README-blockchain-app-v2.md" target="_blank" rel="noopener noreferrer">README</a>| <a href="/">Return to Main Site</a>
         </nav>
       </header>
 
