@@ -10,6 +10,7 @@ RobinSon
 - [Abstract](#abstract)
 - [1. Introduction](#1-introduction)
 - [2. RobinSon Coins](#2-robinson-coins)
+- [3. App Architecture](#3-app-architecture)
 
 ## Abstract
 
@@ -35,6 +36,13 @@ I recently created a couple of RobinSon coins on Solana test net.
 |RobinSon Coin|RS|6hZvLyLLS3JgjxoPfEfrSJv5q1MPxQE5RExzMoLhURYX|888888|SPL|
 
 I will use one of these coins to power my blockchain-app and have it be the coin that can get transferred in the wallets of my blockchain-app!
+
+## 3. App Architecture
+
+New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay for the transaction fees for sending 0R1 (robinson).
+
+## 3.1 
+## 3.2 
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
