@@ -28,9 +28,13 @@ Another issue I am having is that when a wallet has a balance of 0 Sol, that wal
 ## 2. RobinSon Coins
 
 I recently created a couple of RobinSon coins on Solana test net.
--
--
-I will use one of these coins to power my blockchain-app and have it be the coin that can get transferred in my wallet!
+
+|Token|Ticker|address|Supply|Tokenprogram|
+|:---:|:---:|:---:|:---:|:---:|
+|robinson|0R1|6LQoeQhiN4jKELv2vWoZMY4tRbDpFCMz2YKBhEVYXp7h|888888|Token2022|
+|RobinSon Coin|RS|6hZvLyLLS3JgjxoPfEfrSJv5q1MPxQE5RExzMoLhURYX|888888|SPL|
+
+I will use one of these coins to power my blockchain-app and have it be the coin that can get transferred in the wallets of my blockchain-app!
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
