@@ -39,10 +39,19 @@ I will use one of these coins to power my blockchain-app and have it be the coin
 
 ## 3. App Architecture
 
-New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay for the transaction fees for sending 0R1 (robinson).
+New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay for the transaction fees for sending 0R1 (robinson).  
+These 2 coins each have their own way of getting to the user and they determine the Apps Architecture.
 
-## 3.1 
-## 3.2 
+## 3.1 Test net Sol
+
+Each new wallet receives 1 Sol.  
+This Sol comes from a pool of test net Sol that gets topped up by a script that triggers Solana faucet. 
+
+## 3.2 0R1
+
+0R1 (robinson token) gets send out with every new wallet or when a user requests a new 0R1 air drop.
+
 
 ## Braindump
+-Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?
 -Work on branch "blockchain-app-v2"
