@@ -11,6 +11,9 @@ RobinSon
 - [1. Introduction](#1-introduction)
 - [2. RobinSon Coins](#2-robinson-coins)
 - [3. App Architecture](#3-app-architecture)
+- [3.1 Test net Sol](#31-test-net-sol)
+- [3.2 0R1](#32-0r1)
+-[ Wallet]
 
 ## Abstract
 
@@ -26,7 +29,7 @@ The issue that I am having is that when a user of my wallet requests an airdrop,
 
 Another issue I am having is that when a wallet has a balance of 0 Sol, that wallet will end up being deleted by the chain. So if a user of my blockchain-app sends out all their test net Sol, their wallet will be deleted and it can not be used anymore. This to needs fixing...
 
-## 2. RobinSon Coins
+## 2. Robinson Coins
 
 I recently created a couple of RobinSon coins on Solana test net.
 
@@ -49,9 +52,20 @@ This Sol comes from a pool of test net Sol that gets topped up by a script that 
 
 ## 3.2 0R1
 
-0R1 (robinson token) gets send out with every new wallet or when a user requests a new 0R1 air drop.
+0R1 (robinson token) gets send out with every new wallet or when a user requests a new air drop.
+
+## Wallet
+
+Wallet Lifecycle:
+Create: Generate keypair, store in KV, auto-airdrop 1 SOL + 10 0R1 (create ATAs if needed).
+Low Balance: Auto-detect SOL <0.2 → public airdrop attempt → treasury fallback.
+Send/Receive: Focus on 0R1 transfers; SOL transfers optional/minimal.
+
+Frontend: React/TS web app as base. Optional: Extend to mobile with React Native/Expo.
+Backend: Vercel functions for storage/airdrops. Add rate limiting (e.g., per-user daily caps).
+Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/user, 10 0R1/week/user). Monitor treasury via Solana explorer.
 
 
 ## Braindump
--Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?
+-Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?  
 -Work on branch "blockchain-app-v2"
