@@ -67,5 +67,17 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 
 
 ## Braindump
--Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?  
+
 -Work on branch "blockchain-app-v2"
+
+-Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?  
+
+    PRO's:  -Compatibility with GitHub Pages Portfolio.
+            -Cross-Platform Development: Write once, run anywhere...  
+            -Built-in Solana Tools + Expo ecosystem benifits + Templates. 
+            -Mobile-First Focus.
+
+    CON's:  -Expo web works well for basic dApps, not as polished as native frameworks (Vite/React).
+            -Larger overhead: React Native bundles are bigger (~10-20MB vs. v1's <1MB), slower loads.
+            -Dependency Management: Getting locked into Expo SDK (v51+ as of 2025).
+            -Build and Deployment Friction: Web builds require expo export:web or EAS, which outputs static files but may need tweaks for GitHub Pages (e.g., handling routing).
