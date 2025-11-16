@@ -13,6 +13,7 @@ RobinSon
 - [3. App Architecture](#3-app-architecture)
 - [3.1 Test net Sol](#31-test-net-sol)
 - [3.2 0R1](#32-0r1)
+- [3.3 Solana Mobile Expo](#33-solana-mobile-expo)
 -[ Wallet]
 
 ## Abstract
@@ -54,6 +55,22 @@ This Sol comes from a pool of test net Sol that gets topped up by a script that 
 
 0R1 (robinson token) gets send out with every new wallet or when a user requests a new air drop.
 
+## 3.3 Solana Mobile Expo
+
+-Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?  
+
+    PRO's:  -Compatibility with GitHub Pages Portfolio.
+            -Cross-Platform Development: Write once, run anywhere...  
+            -Built-in Solana Tools + Expo ecosystem benifits + Templates. 
+            -Mobile-First Focus.
+
+    CON's:  -Expo web works well for basic dApps, not as polished as native frameworks (Vite/React).
+            -Larger overhead: React Native bundles are bigger (~10-20MB vs. v1's <1MB), slower loads.
+            -Dependency Management: Getting locked into Expo SDK (v51+ as of 2025).
+            -Build and Deployment Friction: Web builds require expo export:web or EAS, which outputs static files but may need tweaks for GitHub Pages (e.g., handling routing).
+
+--> Created the scaffolding for the Mobile app using **Solana Expo's blank-typescript template**
+
 ## Wallet
 
 Wallet Lifecycle:
@@ -70,14 +87,3 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 
 -Work on branch "blockchain-app-v2"
 
--Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?  
-
-    PRO's:  -Compatibility with GitHub Pages Portfolio.
-            -Cross-Platform Development: Write once, run anywhere...  
-            -Built-in Solana Tools + Expo ecosystem benifits + Templates. 
-            -Mobile-First Focus.
-
-    CON's:  -Expo web works well for basic dApps, not as polished as native frameworks (Vite/React).
-            -Larger overhead: React Native bundles are bigger (~10-20MB vs. v1's <1MB), slower loads.
-            -Dependency Management: Getting locked into Expo SDK (v51+ as of 2025).
-            -Build and Deployment Friction: Web builds require expo export:web or EAS, which outputs static files but may need tweaks for GitHub Pages (e.g., handling routing).
