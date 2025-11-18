@@ -1,4 +1,4 @@
-# RobinSon Blockchain-app V2
+# RobinSon Blockchain-app V2 - Architecture & Design
 
 **Work in Progress**
 Blockchain-app V1 that gets rewritten to incorporate RobinSon coins in the wallet. Also completely rewrite the innerworkings of the current app so that RobinSon coin can be transferred through wallets and set up a system so that users get test net Sol auto airdropped, this they need to pay the fees to send RobinSon Coins on Solana test net, but more on that later... 
@@ -11,9 +11,9 @@ RobinSon
 - [1. Introduction](#1-introduction)
 - [2. RobinSon Coins](#2-robinson-coins)
 - [3. App Architecture](#3-app-architecture)
-- [3.1 Test net Sol](#31-test-net-sol)
-- [3.2 0R1](#32-0r1)
-- [3.3 Solana Mobile Expo](#33-solana-mobile-expo)
+        - [3.1 Test net Sol](#31-test-net-sol)
+        - [3.2 0R1](#32-0r1)
+        - [3.3 Solana Mobile Expo](#33-solana-mobile-expo)
 -[ Wallet]
 
 ## Abstract
@@ -86,4 +86,3 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 ## Braindump
 
 -Work on branch "blockchain-app-v2"
-
