@@ -8,9 +8,10 @@ RobinSon**
 - [1. Introduction](#1-introduction)
 - [2. V1 Shortcomings](#2-v1-shortcomings)
 - [3. V2 App Architecture](#3-v2-app-architecture)
-        - [3.1 RobinSon Coins](#31-robinson-coins)
-        - [3.2 Wallet](#32-wallet)
-        - [3.3 Solana Mobile Expo](#33-solana-mobile-expo)
+        - [3.1 Goals of V2](#31-goals-of-v2)
+        - [3.2 RobinSon Coins](#32-robinson-coins)
+        - [3.3 Wallet](#33-wallet)
+        - [3.4 Solana Mobile Expo](#34-solana-mobile-expo)
 
 ## 1. Introduction
 
@@ -30,10 +31,18 @@ Another issue I am having is that when a wallet has a balance of 0 Sol, that wal
 
 ## 3. V2 App Architecture
 
-New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay for the transaction fees for sending 0R1 (robinson).  
+New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay the transaction fees for sending 0R1 (robinson).  
 These 2 coins each have their own way of getting to the user and they determine the Apps Architecture.
 
-## 3.1 Robinson Coins
+## 3.1 Goals of V2
+
+1. Users must always be able to send 0R1 tokens (our app coin) even if public faucets are dry.
+2. New wallets are instantly usable (have both 0R1 and enough testnet SOL for fees).
+3. Wallets never get “rent-deleted” because of 0 SOL balance.
+4. Prevent faucet abuse but keep the app feel “free” for real users.
+5. Focus only on 0R1 token transfers (no SOL transfers between users any more).
+
+## 3.2 Robinson Coins
 
 I recently created a couple of RobinSon coins on Solana test net.
 
@@ -49,7 +58,7 @@ I will use 0R1 to power my blockchain-app and have it be the coin that can get t
 Each new wallet receives 1 Sol.  
 This Sol comes from a pool of test net Sol that gets topped up by a script that triggers Solana faucet. 
 
-## 3.2 Wallet
+## 3.3 Wallet
 
 Wallet Lifecycle:
 Create: Generate keypair, store in DB, auto-airdrop 1 SOL + 10 0R1 (create ATAs if needed).
@@ -60,7 +69,7 @@ Frontend: React/TS web app as base. Optional: Extend to mobile with React Native
 Backend: Vercel functions for storage/airdrops. Add rate limiting (e.g., per-user daily caps).
 Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/user, 10 0R1/week/user). Monitor treasury via Solana explorer.
 
-## 3.3 Solana Mobile Expo
+## 3.4 Solana Mobile Expo
 
 -Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?  
 
