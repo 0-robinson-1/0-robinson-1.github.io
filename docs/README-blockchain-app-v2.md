@@ -83,9 +83,14 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
             -Dependency Management: Getting locked into Expo SDK (v51+ as of 2025).
             -Build and Deployment Friction: Web builds require expo export:web or EAS, which outputs static files but may need tweaks for GitHub Pages (e.g., handling routing).
 
---> Created the scaffolding for the Mobile app using **Solana Expo's blank-typescript template on 16-11-25**
+**-->Created the scaffolding for the Mobile app using Solana Expo's blank-typescript template on 16-11-25, I tested and it worked well.**
 
+## 3.5 High-Level Architecture Diagram
 
+|:---:|:---:|:---:|:---:|:---:|
+|Mobile/Web|
+|Expo/React|
+|:---:|:---:|:---:|:---:|:---:|
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
