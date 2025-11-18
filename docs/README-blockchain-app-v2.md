@@ -69,14 +69,14 @@ This Sol comes from a pool of test net Sol that gets topped up by a script that 
             -Dependency Management: Getting locked into Expo SDK (v51+ as of 2025).
             -Build and Deployment Friction: Web builds require expo export:web or EAS, which outputs static files but may need tweaks for GitHub Pages (e.g., handling routing).
 
---> Created the scaffolding for the Mobile app using **Solana Expo's blank-typescript template**
+--> Created the scaffolding for the Mobile app using **Solana Expo's blank-typescript template on 16-11-25**
 
 ## Wallet
 
 Wallet Lifecycle:
-Create: Generate keypair, store in KV, auto-airdrop 1 SOL + 10 0R1 (create ATAs if needed).
+Create: Generate keypair, store in DB, auto-airdrop 1 SOL + 10 0R1 (create ATAs if needed).
 Low Balance: Auto-detect SOL <0.2 → public airdrop attempt → treasury fallback.
-Send/Receive: Focus on 0R1 transfers; SOL transfers optional/minimal.
+Send/Receive: 0R1 tokens; no more SOL transfers possible. (this is a test wallet and I will focus on 0R1 token)
 
 Frontend: React/TS web app as base. Optional: Extend to mobile with React Native/Expo.
 Backend: Vercel functions for storage/airdrops. Add rate limiting (e.g., per-user daily caps).
