@@ -7,12 +7,10 @@ RobinSon**
 
 - [1. Introduction](#1-introduction)
 - [2. V1 Shortcomings](#2-v1-shortcomings)
-- [2. RobinSon Coins](#2-robinson-coins)
-- [3. App Architecture](#3-app-architecture)
-        - [3.1 Test net Sol](#31-test-net-sol)
-        - [3.2 0R1](#32-0r1)
+- [3. V2 App Architecture](#3-v2-app-architecture)
+        - [3.1 RobinSon Coins](#31-robinson-coins)
+        - [3.2 Wallet](#32-wallet)
         - [3.3 Solana Mobile Expo](#33-solana-mobile-expo)
--[ Wallet]
 
 ## 1. Introduction
 
@@ -30,12 +28,12 @@ The issue that I am having is that when a user of my wallet requests an airdrop,
 
 Another issue I am having is that when a wallet has a balance of 0 Sol, that wallet will end up being deleted by the chain. So if a user of my blockchain-app sends out all their test net Sol, their wallet will be deleted and it can not be used anymore. This to needs fixing...
 
-## 3. App Architecture
+## 3. V2 App Architecture
 
 New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay for the transaction fees for sending 0R1 (robinson).  
 These 2 coins each have their own way of getting to the user and they determine the Apps Architecture.
 
-## 2. Robinson Coins
+## 3.1 Robinson Coins
 
 I recently created a couple of RobinSon coins on Solana test net.
 
@@ -44,18 +42,23 @@ I recently created a couple of RobinSon coins on Solana test net.
 |robinson|0R1|6LQoeQhiN4jKELv2vWoZMY4tRbDpFCMz2YKBhEVYXp7h|888888|Token2022|
 |RobinSon Coin|RS|6hZvLyLLS3JgjxoPfEfrSJv5q1MPxQE5RExzMoLhURYX|888888|SPL|
 
-I will use one of these coins to power my blockchain-app and have it be the coin that can get transferred in the wallets of my blockchain-app!
+I will use 0R1 to power my blockchain-app and have it be the coin that can get transferred in the wallets of my blockchain-app!  
 
-
-
-## 3.1 Test net Sol
+0R1 (robinson token) gets send out with every new wallet or when a user requests a new air drop.  
 
 Each new wallet receives 1 Sol.  
 This Sol comes from a pool of test net Sol that gets topped up by a script that triggers Solana faucet. 
 
-## 3.2 0R1
+## 3.2 Wallet
 
-0R1 (robinson token) gets send out with every new wallet or when a user requests a new air drop.
+Wallet Lifecycle:
+Create: Generate keypair, store in DB, auto-airdrop 1 SOL + 10 0R1 (create ATAs if needed).
+Low Balance: Auto-detect SOL <0.2 → public airdrop attempt → treasury fallback.
+Send/Receive: 0R1 tokens; no more SOL transfers possible. (this is a test wallet and I will focus on 0R1 token)
+
+Frontend: React/TS web app as base. Optional: Extend to mobile with React Native/Expo.
+Backend: Vercel functions for storage/airdrops. Add rate limiting (e.g., per-user daily caps).
+Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/user, 10 0R1/week/user). Monitor treasury via Solana explorer.
 
 ## 3.3 Solana Mobile Expo
 
@@ -73,18 +76,7 @@ This Sol comes from a pool of test net Sol that gets topped up by a script that 
 
 --> Created the scaffolding for the Mobile app using **Solana Expo's blank-typescript template on 16-11-25**
 
-## Wallet
-
-Wallet Lifecycle:
-Create: Generate keypair, store in DB, auto-airdrop 1 SOL + 10 0R1 (create ATAs if needed).
-Low Balance: Auto-detect SOL <0.2 → public airdrop attempt → treasury fallback.
-Send/Receive: 0R1 tokens; no more SOL transfers possible. (this is a test wallet and I will focus on 0R1 token)
-
-Frontend: React/TS web app as base. Optional: Extend to mobile with React Native/Expo.
-Backend: Vercel functions for storage/airdrops. Add rate limiting (e.g., per-user daily caps).
-Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/user, 10 0R1/week/user). Monitor treasury via Solana explorer.
 
 
 ## Braindump
-
 -Work on branch "blockchain-app-v2"
