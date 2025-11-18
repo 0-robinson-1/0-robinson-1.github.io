@@ -87,10 +87,10 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 
 ## 3.5 High-Level Architecture Diagram
 
-|:---:|:---:|:---:|:---:|:---:|
-|Mobile/Web|
-|Expo/React|
-|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|:---:|
+|Mobile/Web|Vecel|Solana|
+|Expo/React|functions|Test net|
+|:---:|:---:|:---:|:---:|
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
