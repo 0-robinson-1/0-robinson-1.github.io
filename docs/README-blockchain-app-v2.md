@@ -88,29 +88,29 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 ### 3.5 High-Level Architecture Diagram
 
 ```text
-+--------------------------+        HTTPS        +---------------------------+        RPC        +-------------------+
++--------------------------+        HTTPS       +---------------------------+        RPC       +-------------------+
 |  Mobile / Web Frontend   | -----------------> |  Vercel Serverless API    | ---------------> |   Solana Testnet  |
-| (Expo React Native / Expo |                    |  (Next.js API routes)     |                  |                   |
+| (Expo React Native / Expo|                    |  (Next.js API routes)     |                  |                   |
 |   or Next.js / Vite)     |                    +------------+--------------+                  +-------------------+
-+--------------------------+                                 |                                                  ^
-           ^              ^                                      |                                                  |
-           |              |                                      |                                                  |
-           |              |                                      |                                                  |
-           |              |                                      |                                                  |
-           |              |                                      |                                                  |
-           |              +-------------------+                  |                                                  |
-           |                                  |                  |                                                  |
-           |                                  |                  |                                                  |
-           |                         +--------v--------+   +-----v------+                                           |
-           |                         |  Treasury       |   |  Database  |                                           |
-           |                         |  Wallet(s)      |   | (Supabase /|                                           |
-           |                         | • 1000+ test SOL|   |  Firebase) |                                           |
-           |                         | • All 0R1 tokens|   | user ↔ pubkey                                         |
-           |                         | Private key in  |   | rate limits                                           |
-           |                         | env vars        |   +------------+                                           |
-           |                         +-----------------+                                                          |
-           |                                                                                                      |
-           +------------------------------------- Auto-refill Cron (Vercel Cron or Render) ---------------------+
++--------------------------+                                     |                                                 ^
+           ^           ^                                         |                                                 |
+           |           |                                         |                                                 |
+           |           |                                         |                                                 |
+           |           |                                         |                                                 |
+           |           |                                         |                                                 |
+           |           +-------------------+                     |                                                 |
+           |                               |                     |                                                 |
+           |                               |                     |                                                 |
+           |                      +--------v----------+      +-----v------+                                        |
+           |                      |  Treasury         |      |  Database  |                                        |
+           |                      |  Wallet(s)        |      |            |                                        |
+           |                      | • 100 test SOL.   |      | rate limits|                                        |
+           |                      | • 10000 0R1 tokens|      +------------+                                        |
+           |                      | Private key in.   |                                                            |
+           |                      | env vars          |                                                            |
+           |                      +-------------------+                                                            |
+           |                                                                                                       |
+           +------------------------------------- Auto-refill Cron (Vercel Cron or Render) ------------------------+
                                                  Requests public faucet → treasury every 5–10 min
 
 
