@@ -87,10 +87,34 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 
 ## 3.5 High-Level Architecture Diagram
 
-|:---:|:---:|:---:|:---:|
-|Mobile/Web|Vecel|Solana|
-|Expo/React|functions|Test net|
-|:---:|:---:|:---:|:---:|
++--------------------------+       HTTPS       +---------------------------+       RPC       +-------------------+
+|  Mobile / Web Frontend  | ----------------> |  Vercel Serverless API    | ---------------> |  Solana Testnet   |
+|  (Expo React Native      |                   |  (Next.js API routes)     |                 |                   |
+|   or Next.js / Vite)     |                   +-------------+-------------+                 +-------------------+
++--------------------------+                                 |                                                   ^
+^             ^                                    |                                                   |
+|             |                                    |                                                   |
+|             |                                    |                                                   |
+|             |                                    |                                                   |
+|             |                                    |                                                   |
+|             |                                    |                                                   |
+|             |                                    |                                                   |
+|             |                                    |                                                   |
+|             +-----------------+   +---------------v----------------+                  |
+|                               |   |  Treasury Wallet(s)            |                  |
+|                               |   |  (holds 1000+ testnet SOL      |                  |
+|                               |   |   + a lot of 0R1 tokens)       |                  |
+|                               |   +--------------------------------+                  |
+|                               |                                                       |
+|                               |   +----------------------+                            |
+|                               +-->|  Supabase / Firebase |                            |
+|                                   |  (user ↔ pubkey      |                            |
+|                                   |   rate limits, logs) |                            |
+|                                   +----------------------+                            |
+|                                                                                       |
++------------------------------------------ Auto-refill Cron -----------------------------+
+(Vercel Cron / Render)
+Requests public faucet → treasury every 5–10 min
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
