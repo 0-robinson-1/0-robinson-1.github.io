@@ -112,7 +112,7 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
            |                                                                                                       |
            +------------------------------------- Auto-refill Cron (Vercel Cron or Render) ------------------------+
                                                  Requests public faucet → treasury every 5–10 min
-
+```
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
