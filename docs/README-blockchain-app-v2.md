@@ -85,36 +85,34 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 
 **-->Created the scaffolding for the Mobile app using Solana Expo's blank-typescript template on 16-11-25, I tested and it worked well.**
 
-## 3.5 High-Level Architecture Diagram
+### 3.5 High-Level Architecture Diagram
 
-+--------------------------+       HTTPS       +---------------------------+       RPC       +-------------------+
-|  Mobile / Web Frontend  | ----------------> |  Vercel Serverless API    | ---------------> |  Solana Testnet   |
-|  (Expo React Native      |                   |  (Next.js API routes)     |                 |                   |
-|   or Next.js / Vite)     |                   +-------------+-------------+                 +-------------------+
-+--------------------------+                                 |                                                   ^
-^             ^                                    |                                                   |
-|             |                                    |                                                   |
-|             |                                    |                                                   |
-|             |                                    |                                                   |
-|             |                                    |                                                   |
-|             |                                    |                                                   |
-|             |                                    |                                                   |
-|             |                                    |                                                   |
-|             +-----------------+   +---------------v----------------+                  |
-|                               |   |  Treasury Wallet(s)            |                  |
-|                               |   |  (holds 1000+ testnet SOL      |                  |
-|                               |   |   + a lot of 0R1 tokens)       |                  |
-|                               |   +--------------------------------+                  |
-|                               |                                                       |
-|                               |   +----------------------+                            |
-|                               +-->|  Supabase / Firebase |                            |
-|                                   |  (user ↔ pubkey      |                            |
-|                                   |   rate limits, logs) |                            |
-|                                   +----------------------+                            |
-|                                                                                       |
-+------------------------------------------ Auto-refill Cron -----------------------------+
-(Vercel Cron / Render)
-Requests public faucet → treasury every 5–10 min
+```text
++--------------------------+        HTTPS        +---------------------------+        RPC        +-------------------+
+|  Mobile / Web Frontend   | -----------------> |  Vercel Serverless API    | ---------------> |   Solana Testnet  |
+| (Expo React Native / Expo |                    |  (Next.js API routes)     |                  |                   |
+|   or Next.js / Vite)     |                    +------------+--------------+                  +-------------------+
++--------------------------+                                 |                                                  ^
+           ^              ^                                      |                                                  |
+           |              |                                      |                                                  |
+           |              |                                      |                                                  |
+           |              |                                      |                                                  |
+           |              |                                      |                                                  |
+           |              +-------------------+                  |                                                  |
+           |                                  |                  |                                                  |
+           |                                  |                  |                                                  |
+           |                         +--------v--------+   +-----v------+                                           |
+           |                         |  Treasury       |   |  Database  |                                           |
+           |                         |  Wallet(s)      |   | (Supabase /|                                           |
+           |                         | • 1000+ test SOL|   |  Firebase) |                                           |
+           |                         | • All 0R1 tokens|   | user ↔ pubkey                                         |
+           |                         | Private key in  |   | rate limits                                           |
+           |                         | env vars        |   +------------+                                           |
+           |                         +-----------------+                                                          |
+           |                                                                                                      |
+           +------------------------------------- Auto-refill Cron (Vercel Cron or Render) ---------------------+
+                                                 Requests public faucet → treasury every 5–10 min
+
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
