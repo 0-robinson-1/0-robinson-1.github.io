@@ -90,24 +90,25 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 ```text
 +----------------------------+        HTTPS       +-------------------------+        RPC       +------------------+
 |  Mobile Expo React Native  | -----------------> |  Vercel Serverless API  | ---------------> |  Solana Testnet  |
-+----------------------------+                    +------------+------------+                  +------------------+
-           ^           ^                                         ^                                     ^
-           |           |                                         |                                     |
-           |           |                                         |                                     |            |
-           |           |                                         |                                     |            |
-           |           |                                         |                                     |            |
-           |           +-------------------+                     |                                     |            |
-           |                               |                     |                                     |            |
-           |                               |                     |                                     |            |
-           |                      +--------v------------+      +-----v------+                            |            |
-           |                      |  Treasury Wallet:   |      |  Database  |                            |            |
-           |                      |  • 100 test net SOL |      |            |                            |            |
-           |                      |  • 10000 0R1   |           | rate limits|                            |            |
-           |                      | • |                        +------------+                            |            |
-           |                      +-------------------+                                                |            |
-           |                                                                                           |            |
-           +------------------------------------- Auto-refill Cron (Vercel Cron or Render) ------------------------+
-                                                 Requests public faucet → treasury every 5–10 min
++--------------+-------------+                    +------------+------------+                  +---------v--------+
+               ^                                               ^                                         ^
+               |                                               |                                         |
+               |                                               |                                         |   
+        +------v------+                                  +-----v------+                                  |
+        | User Wallet |                                  |  Database  |                                  |
+        +------v------+                                  +------------+                                  |
+               |                                                                                         |
+               |                                                                                         |
+    +----------v-------------+                                                                           |
+    |    Treasury Wallet:    |                                                                           |
+    |     • 100 test net SOL |                                                                           |
+    |     • 10000 0R1        |                                                                           |
+    +----------v-------------+                                                                           |  
+               |                                                                                         |
+               |                                                                                         |
+               +-------------------------------------- Auto-refill Vercel Cron --------------------------+
+                                                 Check Treasury Wallet every 5–10 min
+                                                   Requests public faucet < 200 SOL
 ```
 
 ## Braindump
