@@ -88,28 +88,24 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 ### 3.5 High-Level Architecture Diagram
 
 ```text
-+--------------------------+        HTTPS       +---------------------------+        RPC       +-------------------+
-|  Mobile / Web Frontend   | -----------------> |  Vercel Serverless API    | ---------------> |   Solana Testnet  |
-| (Expo React Native / Expo|                    |  (Next.js API routes)     |                  |                   |
-|   or Next.js / Vite)     |                    +------------+--------------+                  +-------------------+
-+--------------------------+                                     |                                                 ^
-           ^           ^                                         |                                                 |
-           |           |                                         |                                                 |
-           |           |                                         |                                                 |
-           |           |                                         |                                                 |
-           |           |                                         |                                                 |
-           |           +-------------------+                     |                                                 |
-           |                               |                     |                                                 |
-           |                               |                     |                                                 |
-           |                      +--------v----------+      +-----v------+                                        |
-           |                      |  Treasury         |      |  Database  |                                        |
-           |                      |  Wallet(s)        |      |            |                                        |
-           |                      | • 100 test SOL.   |      | rate limits|                                        |
-           |                      | • 10000 0R1 tokens|      +------------+                                        |
-           |                      | Private key in.   |                                                            |
-           |                      | env vars          |                                                            |
-           |                      +-------------------+                                                            |
-           |                                                                                                       |
++----------------------------+        HTTPS       +-------------------------+        RPC       +------------------+
+|  Mobile Expo React Native  | -----------------> |  Vercel Serverless API  | ---------------> |  Solana Testnet  |
++----------------------------+                    +------------+------------+                  +------------------+
+           ^           ^                                         ^                                     ^
+           |           |                                         |                                     |
+           |           |                                         |                                     |            |
+           |           |                                         |                                     |            |
+           |           |                                         |                                     |            |
+           |           +-------------------+                     |                                     |            |
+           |                               |                     |                                     |            |
+           |                               |                     |                                     |            |
+           |                      +--------v------------+      +-----v------+                            |            |
+           |                      |  Treasury Wallet:   |      |  Database  |                            |            |
+           |                      |  • 100 test net SOL |      |            |                            |            |
+           |                      |  • 10000 0R1   |           | rate limits|                            |            |
+           |                      | • |                        +------------+                            |            |
+           |                      +-------------------+                                                |            |
+           |                                                                                           |            |
            +------------------------------------- Auto-refill Cron (Vercel Cron or Render) ------------------------+
                                                  Requests public faucet → treasury every 5–10 min
 ```
