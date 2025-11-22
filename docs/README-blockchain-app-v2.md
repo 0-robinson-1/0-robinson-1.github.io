@@ -71,6 +71,10 @@ Security/Abuse Prevention: KV-tracked timestamps for airdrops (e.g., 1 SOL/day/u
 
 ## 3.4 Solana Mobile Expo
 
+Frameworks: Expo, React Native
+Solana SDKs: @solana/web3.js
+Wallet Adapters: Mobile Wallet Adapter
+
 -Can I use Solana Mobile Expo to create a Solana mobile app with Expo and **React Native**?  
 
     PRO's:  -Compatibility with GitHub Pages Portfolio.
