@@ -14,6 +14,7 @@ RobinSon**
         - [3.4 Solana Mobile Expo](#34-solana-mobile-expo)
         - [3.5 High-Level Architecture Diagram](#35-high-level-architecture-diagram)
         - [3.6 Treasury](#36-treasury)
+        - [3.7 Auto-refill](#37-auto-refill)
 
 ## 1. Introduction
 
@@ -126,6 +127,13 @@ On the other hand a auto-refill system can be set up through Vercel Cron jobs we
 Test net SOL is what is required to pay the fees for interacting with the Solana test net chain.  
 0R1 (robinson coin) lives on Solana test net so every time 0R1 gets send, a tiny bit of SOL needs to be paid as a transaction fee. The user of my wallet will not see this SOL nor will they know anything about it... For the purpose of this blockchain-app demo for my coding portfolio, the users need to be able to send and receive robinson coins without having to worry about SOL to pay the fees. In the background this will be taken care off by Vercel Cron jobs through an auto-refill which tops up all wallets periodically.
 
+## 3.7 Auto-refill
+
+The SOL test net Auto-refill will be done by Vercel Cron jobs, a event-driven auto-refill using Alchemy's Address Activity webhooks.   
+Options for this would be using The Graph Studio, Subsquid Cloud, Covalent API or Alchemy Notify...  
+Since I am building on Solana test net for my blockchain-app, the best fit from the stack is Alchemy Notify with Address Activity webhooks. This keeps the event-driven architecture intact (on-chain events → webhook → Vercel function → balance check & auto-refill) while being zero-cost and Solana-native!  
+
+Alchemy Notify supports full DAS APIs for Solana test net. It is Solana-optimised with webhooks that fire on wallet activity (e.g. token transfers or SOL balance drops), this is good for triggering the auto-refill without custom indexing code. Alchemy's Solana Testnet endpoints are battle-tested for dev workflows and get instant notifications on test SOL/token events without rate limits and it is for free unlimited in the free tier.
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
