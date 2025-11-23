@@ -124,8 +124,7 @@ The biggest issue with V1 was the Solana test net faucet running dry and users o
 By setting up a Treasury Wallet which holds 10000 0R1 and 100 SOL, a couple of things can be accomplished. On the one hand when users run out of 0R1 or just want some extra, they can request an airdrop and the treasury account can supply these tokens.  
 On the other hand a auto-refill system can be set up through Vercel Cron jobs were, if a wallet runs out of test net SOL, 1 SOL will be automatically send from the treasury to this wallet.
 Test net SOL is what is required to pay the fees for interacting with the Solana test net chain.  
-0R1 (robinson coin) lives on Solana test net so every time 0R1 gets send, a tiny bit of SOL needs to be paid as a transaction fee. The user of my wallet will not see this SOL nor will they know anything about it... For the purpose of this blockchain-app demo for my coding portfolio, the users need to be able to send and receive robinson coins without having to worry about SOL to pay the fees.
-
+0R1 (robinson coin) lives on Solana test net so every time 0R1 gets send, a tiny bit of SOL needs to be paid as a transaction fee. The user of my wallet will not see this SOL nor will they know anything about it... For the purpose of this blockchain-app demo for my coding portfolio, the users need to be able to send and receive robinson coins without having to worry about SOL to pay the fees. In the background this will be taken care off by Vercel Cron jobs through an auto-refill which tops up all wallets periodically.
 
 
 ## Braindump
