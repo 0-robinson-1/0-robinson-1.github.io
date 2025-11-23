@@ -12,6 +12,8 @@ RobinSon**
         - [3.2 RobinSon Coins](#32-robinson-coins)
         - [3.3 Wallet](#33-wallet)
         - [3.4 Solana Mobile Expo](#34-solana-mobile-expo)
+        - [3.5 High-Level Architecture Diagram](#35-high-level-architecture-diagram)
+        - [3.6 Treasury](#36-treasury)
 
 ## 1. Introduction
 
@@ -114,6 +116,15 @@ Wallet Adapters: Mobile Wallet Adapter
                                                  Check Treasury Wallet every 5–10 min
                                                    Requests public faucet < 200 SOL
 ```
+
+## 3.6 Treasury
+
+The Treasury lies at the heart of the blockchain-app, some off the main shortcomings of V1 can be overcome by introducing a Treasury!  
+The biggest issue with V1 was the Solana test net faucet running dry and users of my wallet getting an error when requesting a SOL airdrop. When users don't have SOL to send or pay the fees with, the wallet is useless...  
+By setting up a Treasury Wallet which holds 10000 0R1 and 100 SOL, a couple of things can be accomplished. On the one hand when users run out of 0R1 or just want some extra, they can request an airdrop and the treasury account can supply these tokens. On the other hand a auto-refill system can be set up through Vercel Cron jobs were, if a wallet runs out of test net SOL, 1 SOL will be automatically send from the treasury to this wallet.  
+Test net SOL is what is required to pay the fees for interacting with the Solana test net... 
+
+
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
