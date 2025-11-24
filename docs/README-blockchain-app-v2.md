@@ -7,7 +7,7 @@ RobinSon**
 
 - [1. Introduction](#1-introduction)
 - [2. V1 Shortcomings](#2-v1-shortcomings)
-- [3. V2 App Architecture](#3-v2-app-architecture)
+- [3. V2 Architecture](#3-v2-architecture)
         - [3.1 Goals of V2](#31-goals-of-v2)
         - [3.2 RobinSon Coins](#32-robinson-coins)
         - [3.3 Wallet](#33-wallet)
@@ -32,7 +32,7 @@ The issue that I am having is that when a user of my wallet requests an airdrop,
 
 Another issue I am having is that when a wallet has a balance of 0 Sol, that wallet will end up being deleted by the chain. So if a user of my blockchain-app sends out all their test net Sol, their wallet will be deleted and it can not be used anymore. This to needs fixing...
 
-## 3. V2 App Architecture
+## 3. V2 Architecture
 
 New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay the transaction fees for sending 0R1 (robinson).  
 These 2 coins each have their own way of getting to the user and they determine the Apps Architecture.
