@@ -144,9 +144,9 @@ Users of the wallet can send robinson coins to each other, when they run out or 
 ### How the Airdrop Works
 
 - Each wallet can request **10 0R1** every **8 hours**.  
-- Protected by **Cloudflare Turnstile** (invisible CAPTCHA) – zero friction, blocks bots.  
+- Protected by Cloudflare Turnstile (invisible CAPTCHA) – zero friction, blocks bots.  
 - All requests are validated on-chain: no double-spending, no abuse.  
-- Transactions are submitted via **Versioned Transactions** and confirmed with **Priority Fees** for fast inclusion.  
+- Transactions are submitted via Versioned Transactions and confirmed with Priority Fees for fast inclusion.  
 - Full history visible in the app.
 
 ### Tech Stack
