@@ -16,6 +16,7 @@ RobinSon**
         - [3.6 Treasury](#36-treasury)
         - [3.7 Auto-refill](#37-auto-refill)
         - [3.8 0R1 airdrop](#38-0r1-airdrop)
+        - [3.9 Security & Anti-Abuse Design](#39-security-&-anti-abuse-design)
 
 ## 1. Introduction
 
@@ -156,6 +157,45 @@ Users of the wallet can send robinson coins to each other, when they run out or 
 - Rate-limiting: Vercel KV (Redis) + wallet address as key.  
 - CAPTCHA: Cloudflare Turnstile (free, privacy-friendly).  
 - Transaction building: `@solana/web3.js` + SPL transfer from a dedicated faucet key.  
+
+## 3.9 Security & Anti-Abuse Design
+
+### Core Principles
+- Trust no client – all sensitive operations are validated server-side.
+- Never expose treasury or faucet private keys to the frontend or Vercel logs.
+- Rate-limit everything by wallet address + IP + fingerprint when possible.
+- Use multiple defensive layers (CAPTCHA → rate-limit → on-chain checks → allow-listing).
+
+### Implemented Protections
+
+**Bot spam on 0R1 airdrop**  
+Cloudflare Turnstile (invisible CAPTCHA) + Vercel KV rate limiting.  
+20 0R1 max every 8 hours per wallet address, 2nd layer IP-based limit (50/day).  
+
+**Treasury draining**  
+Dedicated faucet signer (hot wallet) with limited balance.
+Treasury (cold) → periodic manual or scripted refill into hot faucet wallet.  
+
+**Multiple wallet farming**
+Fingerprinting + wallet creation limits + on-chain heuristics.  
+
+**SOL auto-refill abuse**
+Minimum balance trigger only when SOL < 0.05 and max 2 SOL auto-refill per wallet per 24h.  
+
+**Rent-exemption deletion**  
+Keep every wallet ≥ 0.05 SOL at all times, auto-refill guarantees rent-exempt status forever.  
+
+**Alchemy webhook spoofing**  
+Verify webhook signature using Alchemy’s HMAC secret.  
+
+**Private key leakage**  
+Private keys stored only in Vercel Environment Variables + never logged.  
+Use `process.env.FAUCET_SECRET_KEY` (base58) and `Buffer.from()` only inside serverless functions.  
+
+### Key Management Strategy
+- Treasury wallet (cold): holds the vast majority of funds; never signs transactions automatically.
+- Faucet wallet (hot): small rotating balance, signs all airdrops and auto-refills.
+- Refill bot (manual or future cron): moves funds from cold → hot when hot balance < threshold.
 
 ### Braindump
 -Work on branch "blockchain-app-v2"
