@@ -15,6 +15,7 @@ RobinSon**
         - [3.5 High-Level Architecture Diagram](#35-high-level-architecture-diagram)
         - [3.6 Treasury](#36-treasury)
         - [3.7 Auto-refill](#37-auto-refill)
+        - [3.8 0R1 airdrop](#38-0r1-airdrop)
 
 ## 1. Introduction
 
@@ -134,6 +135,19 @@ Options for this would be using The Graph Studio, Subsquid Cloud, Covalent API o
 Since I am building on Solana test net for my blockchain-app, the best fit from the stack is Alchemy Notify with Address Activity webhooks. This keeps the event-driven architecture intact (on-chain events → webhook → Vercel function → balance check & auto-refill) while being zero-cost and Solana-native!  
 
 Alchemy Notify supports full DAS APIs for Solana test net. It is Solana-optimised with webhooks that fire on wallet activity (e.g. token transfers or SOL balance drops), this is good for triggering the auto-refill without custom indexing code. Alchemy's Solana Testnet endpoints are battle-tested for dev workflows and get instant notifications on test SOL/token events without rate limits and it is for free unlimited in the free tier.
+
+## 3.8 0R1 airdrop
+
+0R1 (robinson coin) is the means of transacting within the RobinSon blockchain-app.  
+Users of the wallet can send robinson coins to each other, when they run out or just like to have some more they can request an airdrop of 10 0R1.  
+
+### How the Airdrop Works
+
+- Each wallet can request **10 0R1** every **8 hours**  
+- Protected by **Cloudflare Turnstile** (invisible CAPTCHA) – zero friction, blocks bots  
+- All requests are validated on-chain: no double-spending, no abuse  
+- Transactions are submitted via **Versioned Transactions** and confirmed with **Priority Fees** for fast inclusion  
+- Full history visible in the app
 
 ## Braindump
 -Work on branch "blockchain-app-v2"
