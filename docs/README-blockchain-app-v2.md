@@ -208,5 +208,11 @@ Use `process.env.FAUCET_SECRET_KEY` (base58) and `Buffer.from()` only inside ser
 | 4 | Full mobile app (Expo + Solana Mobile) with same backend | Planned | Dec 2026 |
 | 5 | Leaderboard + transaction history + “send 0R1 by username” | Planned | Jan 2026 |
 
+## 5. Live links
+
+RobinSon-app V1: https://0-robinson-1.github.io/blockchain/  
+0R1 (robinson coin explorer): https://explorer.solana.com/address/6LQoeQhiN4jKELv2vWoZMY4tRbDpFCMz2YKBhEVYXp7h?cluster=testnet  
+
+
 ### Braindump
 -Work on branch "blockchain-app-v2"
