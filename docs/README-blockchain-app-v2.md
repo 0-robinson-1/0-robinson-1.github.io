@@ -7,7 +7,7 @@ RobinSon**
 
 - [1. Introduction](#1-introduction)
 - [2. V1 Shortcomings](#2-v1-shortcomings)
-- [3. V2 Architecture](#3-v2-architecture)
+- [3. V2 Architecture & Design](#3-v2-architecture-&-design)
         - [3.1 Goals of V2](#31-goals-of-v2)
         - [3.2 RobinSon Coins](#32-robinson-coins)
         - [3.3 Wallet](#33-wallet)
@@ -17,6 +17,7 @@ RobinSon**
         - [3.7 Auto-refill](#37-auto-refill)
         - [3.8 0R1 airdrop](#38-0r1-airdrop)
         - [3.9 Security & Anti-Abuse Design](#39-security-&-anti-abuse-design)
+        - [4. Implementation Roadmap](#4-implementation-roadmap)
 
 ## 1. Introduction
 
@@ -34,7 +35,7 @@ The issue that I am having is that when a user of my wallet requests an airdrop,
 
 Another issue I am having is that when a wallet has a balance of 0 Sol, that wallet will end up being deleted by the chain. So if a user of my blockchain-app sends out all their test net Sol, their wallet will be deleted and it can not be used anymore. This to needs fixing...
 
-## 3. V2 Architecture
+## 3. V2 Architecture & Design
 
 New wallets come with 10 robinson coins and 1 testnet Sol. Robinson coins are the currency in the blockchain-app and testnet Sol is there to pay the transaction fees for sending 0R1 (robinson).  
 These 2 coins each have their own way of getting to the user and they determine the Apps Architecture.
@@ -196,6 +197,16 @@ Use `process.env.FAUCET_SECRET_KEY` (base58) and `Buffer.from()` only inside ser
 - Treasury wallet (cold): holds the vast majority of funds; never signs transactions automatically.
 - Faucet wallet (hot): small rotating balance, signs all airdrops and auto-refills.
 - Refill bot (manual or future cron): moves funds from cold → hot when hot balance < threshold.
+
+## 4. Implementation Roadmap
+
+| Phase | Goal | Status | Date |
+|------|------|--------|------|
+| 1 | Core wallet creation + treasury → user airdrop (1 SOL + 10 0R1) | Starting | Nov 2025 |
+| 2 | 0R1 faucet endpoint with Turnstile + FingerprintJS | Next | Dec 2025 |
+| 3 | Event-driven auto-refill (Alchemy Address Activity webhook) | Planned | Dec 2025 |
+| 4 | Full mobile app (Expo + Solana Mobile) with same backend | Planned | Dec 2026 |
+| 5 | Leaderboard + transaction history + “send 0R1 by username” | Planned | Jan 2026 |
 
 ### Braindump
 -Work on branch "blockchain-app-v2"
