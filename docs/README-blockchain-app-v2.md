@@ -202,7 +202,7 @@ Use `process.env.FAUCET_SECRET_KEY` (base58) and `Buffer.from()` only inside ser
 
 | Phase | Goal | Status | Date |
 |------|------|--------|------|
-| 1 | Core wallet creation + treasury → user airdrop (1 SOL + 10 0R1) | Starting | Nov 2025 |
+| 1 | Core wallet creation + treasury → user airdrop (1 SOL + 10 0R1) | Started | 27 Nov 2025 |
 | 2 | 0R1 faucet endpoint with Turnstile + FingerprintJS | Next | Dec 2025 |
 | 3 | Event-driven auto-refill (Alchemy Address Activity webhook) | Planned | Dec 2025 |
 | 4 | Full mobile app (Expo + Solana Mobile) with same backend | Planned | Dec 2026 |
