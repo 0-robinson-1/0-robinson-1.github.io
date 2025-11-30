@@ -1,4 +1,4 @@
-// faucet-server.ts  ← FINAL VERSION – works immediately
+// faucet-server.ts
 import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import {
   getOrCreateAssociatedTokenAccount,
@@ -13,7 +13,7 @@ import http from "http";
 const connection = new Connection("https://api.testnet.solana.com", "confirmed");
 
 const faucetKeypair = Keypair.fromSecretKey(
-  Uint8Array.from(JSON.parse(fs.readFileSync(path.join(os.homedir(), "faucet-keypair.json"), "utf8")))
+  Uint8Array.from(JSON.parse(fs.readFileSync(path.join(__dirname, "faucet-keypair.json"), "utf8")))
 );
 
 const MINT = new PublicKey("J4QzC5vdV7atHXnEwXQgYDniuPtVCJeiEhFFqgjCvftQ");
