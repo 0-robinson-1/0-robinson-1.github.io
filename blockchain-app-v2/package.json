@@ -4,11 +4,11 @@
 "type": "module",
 "main": "index.ts",
 "scripts": {
-"start": "expo start",
-"start:faucet": "tsx faucet-server.ts",
-"android": "expo start --android",
-"ios": "expo start --ios",
-"web": "expo start --web"
+  "start": "expo start",
+  "start:faucet": "tsx solana-faucet/faucet-server.ts",
+  "android": "expo start --android",
+  "ios": "expo start --ios",
+  "web": "expo start --web"
 },
 "dependencies": {
 "@solana/spl-token": "^0.4.14",
