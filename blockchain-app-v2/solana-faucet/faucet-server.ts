@@ -12,9 +12,15 @@ import http from "http";
 
 const connection = new Connection("https://api.testnet.solana.com", "confirmed");
 
-const faucetKeypair = Keypair.fromSecretKey(
-  Uint8Array.from(JSON.parse(fs.readFileSync(path.join(__dirname, "..", "faucet-keypair.json"), "utf8")))
-);
+// Load keypair from env var (Vercel) or fallback to local file (local dev)
+let faucetSecretKey: Uint8Array;
+if (process.env.FAUCET_KEYPAIR) {
+  faucetSecretKey = Uint8Array.from(JSON.parse(process.env.FAUCET_KEYPAIR));
+} else {
+  // Local fallback (remove this block if you want pure Vercel-only)
+  faucetSecretKey = Uint8Array.from(JSON.parse(fs.readFileSync(path.join(__dirname, "..", "faucet-keypair.json"), "utf8")));
+}
+const faucetKeypair = Keypair.fromSecretKey(faucetSecretKey);
 
 const MINT = new PublicKey("J4QzC5vdV7atHXnEwXQgYDniuPtVCJeiEhFFqgjCvftQ");
 const TOKENS_PER_REQUEST = 1_000_000_000n; // 1 token (9 decimals)
@@ -116,4 +122,6 @@ const server = http.createServer(async (req, res) => {
   });
 });
 
-server.listen(3000, () => console.log("Faucet is LIVE → http://localhost:3000"));
+// Listen on Vercel-assigned port or default 3000 for local
+const port = process.env.PORT || 3000;
+server.listen(port, () => console.log(`Faucet is LIVE → http://localhost:${port}`));

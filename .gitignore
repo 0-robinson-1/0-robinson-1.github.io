@@ -37,6 +37,7 @@ keys/
 !index.html
 !blockchain-app/package.json   # allow blockchain-app npm config
 !blockchain-app/index.html     # if you have one
+faucet-keypair.json
 
 # === Optional: ignore blockchain-app build ===
 blockchain-app/dist/
