@@ -9,6 +9,11 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 import http from "http";
+import { fileURLToPath } from "url";
+
+// Polyfill for __dirname in ES modules (Node.js v20+ compatible)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const connection = new Connection("https://api.testnet.solana.com", "confirmed");
 
