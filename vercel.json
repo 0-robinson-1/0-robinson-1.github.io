@@ -10,7 +10,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/**/*.ts",
+      "src": "blockchain-app-v2/api/**/*.ts",
       "use": "@vercel/node"
     }
   ],
@@ -18,6 +18,10 @@
     {
       "src": "/api/get-wallet/(.*)",
       "dest": "/blockchain-app/api/get-wallet.ts"
+    },
+    {
+      "src": "/api/request",
+      "dest": "/blockchain-app-v2/api/request.ts"
     },
     {
       "src": "/api/(.*)",
