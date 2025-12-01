@@ -8,6 +8,10 @@
     {
       "src": "blockchain-app/api/**/*.ts",
       "use": "@vercel/node"
+    },
+    {
+      "src": "api/**/*.ts",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -17,7 +21,7 @@
     },
     {
       "src": "/api/(.*)",
-      "dest": "/blockchain-app/api/$1"
+      "dest": "/api/$1"
     },
     {
       "src": "/blockchain/(.*)",
