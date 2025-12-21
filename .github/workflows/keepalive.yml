@@ -1,3 +1,7 @@
 YAML
 
 name: Upstash Keep-Alive
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Runs every day at 08:00 UTC'
