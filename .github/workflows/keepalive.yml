@@ -1,7 +1,42 @@
-YAML
-
 name: Upstash Keep-Alive
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Runs every day at 08:00 UTC'
+    - cron: '0 8 * * *'  # Every day at 8:00 UTC
+
+jobs:
+  ping-upstash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Upstash Redis client
+        run: npm install @upstash/redis
+
+      - name: Send keep-alive ping
+        env:
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+        run: |
+          node -e "
+          const { Redis } = require('@upstash/redis');
+          const redis = new Redis({
+            url: process.env.UPSTASH_REDIS_REST_URL,
+            token: process.env.UPSTASH_REDIS_REST_TOKEN,
+          });
+          (async () => {
+            try {
+              const response = await redis.ping();
+              console.log('Upstash ping successful:', response);
+            } catch (error) {
+              console.error('Upstash ping failed:', error.message);
+              process.exit(1);
+            }
+          })();
+          "
