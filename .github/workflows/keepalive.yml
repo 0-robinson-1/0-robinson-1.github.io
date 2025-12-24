@@ -3,30 +3,55 @@ name: Upstash Keep-Alive
 on:
   schedule:
     - cron: '0 8 * * *'  # Every day at 8:00 UTC
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:     # Manual trigger
 
 jobs:
   ping-upstash:
     runs-on: ubuntu-latest
     steps:
-      - name: Send keep-alive PING
+      - name: Send keep-alive PING (GET style)
         env:
           UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
           UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
         run: |
-          RESPONSE=$(curl -s -w "%{http_code}" \
+          echo "Testing GET /ping with Bearer token..."
+          echo "URL: $UPSTASH_REDIS_REST_URL"
+          echo "Token first 5 chars: ${UPSTASH_REDIS_REST_TOKEN:0:5}..."  # For debugging, hides full token
+
+          RESPONSE=$(curl -s -w "\n%{http_code}" \
             -H "Authorization: Bearer ${UPSTASH_REDIS_REST_TOKEN}" \
             "${UPSTASH_REDIS_REST_URL}/ping")
+
+          echo "Full response:"
+          echo "$RESPONSE"
           
-          HTTP_CODE=${RESPONSE: -3}
-          BODY=${RESPONSE%???}
-          
-          echo "Response body: $BODY"
-          echo "HTTP status: $HTTP_CODE"
-          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | sed '$d')
+
           if [ "$HTTP_CODE" = "200" ] && echo "$BODY" | grep -q "PONG"; then
-            echo "✅ PING successful! Upstash received activity."
+            echo "GET PING successful!"
+            exit 0
           else
-            echo "❌ PING failed! Check secrets, URL, or token."
+            echo "GET failed (HTTP $HTTP_CODE). Trying POST style as fallback..."
+          fi
+
+          # Fallback: POST with JSON array (also valid for PING)
+          POST_RESPONSE=$(curl -s -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${UPSTASH_REDIS_REST_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d '["PING"]' \
+            "${UPSTASH_REDIS_REST_URL}")
+
+          echo "POST response:"
+          echo "$POST_RESPONSE"
+
+          POST_HTTP=$(echo "$POST_RESPONSE" | tail -n1)
+          POST_BODY=$(echo "$POST_RESPONSE" | sed '$d')
+
+          if [ "$POST_HTTP" = "200" ] && echo "$POST_BODY" | grep -q "PONG"; then
+            echo "POST PING successful!"
+            exit 0
+          else
+            echo "Both PING attempts failed! Likely auth issue (check secrets) or wrong URL."
             exit 1
           fi
