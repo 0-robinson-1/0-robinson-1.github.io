@@ -9,49 +9,25 @@ jobs:
   ping-upstash:
     runs-on: ubuntu-latest
     steps:
-      - name: Send keep-alive PING (GET style)
+      - name: Send keep-alive PING
         env:
           UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
           UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
         run: |
-          echo "Testing GET /ping with Bearer token..."
-          echo "URL: $UPSTASH_REDIS_REST_URL"
-          echo "Token first 5 chars: ${UPSTASH_REDIS_REST_TOKEN:0:5}..."  # For debugging, hides full token
-
+          echo "Sending PING at $(date -u)"
           RESPONSE=$(curl -s -w "\n%{http_code}" \
             -H "Authorization: Bearer ${UPSTASH_REDIS_REST_TOKEN}" \
             "${UPSTASH_REDIS_REST_URL}/ping")
 
-          echo "Full response:"
-          echo "$RESPONSE"
-          
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | sed '$d')
 
+          echo "Response: $BODY"
+          echo "HTTP: $HTTP_CODE"
+
           if [ "$HTTP_CODE" = "200" ] && echo "$BODY" | grep -q "PONG"; then
-            echo "GET PING successful!"
-            exit 0
+            echo "✅ Success! Database activity recorded."
           else
-            echo "GET failed (HTTP $HTTP_CODE). Trying POST style as fallback..."
-          fi
-
-          # Fallback: POST with JSON array (also valid for PING)
-          POST_RESPONSE=$(curl -s -w "\n%{http_code}" \
-            -H "Authorization: Bearer ${UPSTASH_REDIS_REST_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -d '["PING"]' \
-            "${UPSTASH_REDIS_REST_URL}")
-
-          echo "POST response:"
-          echo "$POST_RESPONSE"
-
-          POST_HTTP=$(echo "$POST_RESPONSE" | tail -n1)
-          POST_BODY=$(echo "$POST_RESPONSE" | sed '$d')
-
-          if [ "$POST_HTTP" = "200" ] && echo "$POST_BODY" | grep -q "PONG"; then
-            echo "POST PING successful!"
-            exit 0
-          else
-            echo "Both PING attempts failed! Likely auth issue (check secrets) or wrong URL."
+            echo "❌ Failed (HTTP $HTTP_CODE). Check secrets/URL."
             exit 1
           fi
