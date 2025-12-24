@@ -3,17 +3,30 @@ name: Upstash Keep-Alive
 on:
   schedule:
     - cron: '0 8 * * *'  # Every day at 8:00 UTC
-  workflow_dispatch:  # Allows manual runs
+  workflow_dispatch:  # Manual trigger
 
 jobs:
   ping-upstash:
     runs-on: ubuntu-latest
     steps:
-      - name: Send keep-alive ping via direct REST API
+      - name: Send keep-alive PING
         env:
           UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
           UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
         run: |
-          curl "${UPSTASH_REDIS_REST_URL}/ping" \
-            -u ":${UPSTASH_REDIS_REST_TOKEN}" \
-            -X GET && echo "Ping sent successfully!" || echo "Ping failed"
+          RESPONSE=$(curl -s -w "%{http_code}" \
+            -H "Authorization: Bearer ${UPSTASH_REDIS_REST_TOKEN}" \
+            "${UPSTASH_REDIS_REST_URL}/ping")
+          
+          HTTP_CODE=${RESPONSE: -3}
+          BODY=${RESPONSE%???}
+          
+          echo "Response body: $BODY"
+          echo "HTTP status: $HTTP_CODE"
+          
+          if [ "$HTTP_CODE" = "200" ] && echo "$BODY" | grep -q "PONG"; then
+            echo "✅ PING successful! Upstash received activity."
+          else
+            echo "❌ PING failed! Check secrets, URL, or token."
+            exit 1
+          fi
