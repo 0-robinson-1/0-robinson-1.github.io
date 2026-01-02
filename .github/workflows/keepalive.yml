@@ -6,28 +6,49 @@ on:
   workflow_dispatch:     # Manual trigger
 
 jobs:
-  ping-upstash:
+  keep-upstash-active:
     runs-on: ubuntu-latest
     steps:
-      - name: Send keep-alive PING
+      - name: Send keep-alive SET and GET
         env:
           UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
           UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
         run: |
-          echo "Sending PING at $(date -u)"
-          RESPONSE=$(curl -s -w "\n%{http_code}" \
+          CURRENT_DATE=$(date -u +%Y-%m-%d)
+          echo "Setting keepalive key to $CURRENT_DATE at $(date -u)"
+
+          # Perform SET
+          SET_RESPONSE=$(curl -s -w "\n%{http_code}" \
             -H "Authorization: Bearer ${UPSTASH_REDIS_REST_TOKEN}" \
-            "${UPSTASH_REDIS_REST_URL}/ping")
+            "${UPSTASH_REDIS_REST_URL}/set/keepalive/$CURRENT_DATE")
 
-          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
-          BODY=$(echo "$RESPONSE" | sed '$d')
+          SET_HTTP_CODE=$(echo "$SET_RESPONSE" | tail -n1)
+          SET_BODY=$(echo "$SET_RESPONSE" | sed '$d')
 
-          echo "Response: $BODY"
-          echo "HTTP: $HTTP_CODE"
+          echo "SET Response: $SET_BODY"
+          echo "SET HTTP: $SET_HTTP_CODE"
 
-          if [ "$HTTP_CODE" = "200" ] && echo "$BODY" | grep -q "PONG"; then
-            echo "✅ Success! Database activity recorded."
+          if [ "$SET_HTTP_CODE" != "200" ] || ! echo "$SET_BODY" | grep -q '"result":"OK"'; then
+            echo "❌ SET Failed (HTTP $SET_HTTP_CODE). Check secrets/URL."
+            exit 1
+          fi
+
+          echo "✅ SET Success!"
+
+          # Perform GET
+          GET_RESPONSE=$(curl -s -w "\n%{http_code}" \
+            -H "Authorization: Bearer ${UPSTASH_REDIS_REST_TOKEN}" \
+            "${UPSTASH_REDIS_REST_URL}/get/keepalive")
+
+          GET_HTTP_CODE=$(echo "$GET_RESPONSE" | tail -n1)
+          GET_BODY=$(echo "$GET_RESPONSE" | sed '$d')
+
+          echo "GET Response: $GET_BODY"
+          echo "GET HTTP: $GET_HTTP_CODE"
+
+          if [ "$GET_HTTP_CODE" = "200" ] && echo "$GET_BODY" | grep -q '"result":"'"$CURRENT_DATE"'"; then
+            echo "✅ GET Success! Database activity recorded."
           else
-            echo "❌ Failed (HTTP $HTTP_CODE). Check secrets/URL."
+            echo "❌ GET Failed (HTTP $GET_HTTP_CODE) or value mismatch. Check secrets/URL."
             exit 1
           fi
