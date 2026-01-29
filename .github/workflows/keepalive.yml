@@ -46,7 +46,7 @@ jobs:
           echo "GET Response: $GET_BODY"
           echo "GET HTTP: $GET_HTTP_CODE"
 
-          if [ "$GET_HTTP_CODE" = "200" ] && echo "$GET_BODY" | grep -q '"result":"'"$CURRENT_DATE"'"; then
+          if [ "$GET_HTTP_CODE" = "200" ] && echo "$GET_BODY" | grep -q "\"result\":\"$CURRENT_DATE\""; then
             echo "✅ GET Success! Database activity recorded."
           else
             echo "❌ GET Failed (HTTP $GET_HTTP_CODE) or value mismatch. Check secrets/URL."
